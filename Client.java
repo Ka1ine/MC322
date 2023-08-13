@@ -2,6 +2,7 @@ public class Client {
     private String name;
     private int rg;
 
+    //Constructor
     public Client(String name, int rg) {
         this.name = name;
         this.rg = rg;
