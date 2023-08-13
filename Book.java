@@ -6,6 +6,7 @@ public class Book {
     private String author;
     private String isbn;
 
+    //Constructor
     public Book(String title, String description, String edition, String language, String author, String isbn) {
         this.title = title;
         this.description = description;
@@ -57,6 +58,4 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    
-
 }
