@@ -38,5 +38,14 @@ public class Main {
         String status = fisrtBorrow.getStatus();
         System.out.println("Status do livro " + title + ": " + status);
 
+        //Instanciando um funcionario
+        Employee myEmployee = new Employee(
+                                    "Rogerio", 
+                                    4545, 
+                                    "recepcionista");
+
+        String employeeName = myEmployee.getName();
+        String employeePosition = myEmployee.getPosition();
+        System.out.println(employeeName + " é o novo funcionario e seu cargo e " + employeePosition);
     }
 }
