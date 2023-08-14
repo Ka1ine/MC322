@@ -22,6 +22,14 @@ public class Book {
         this.age = age;
     }
 
+    //Methods
+    public void borrow(){
+        System.out.println("Pegando livro");
+    }
+    public void giveBack(){
+        System.out.println("Devolvendo livro");
+    }
+
     // Get and Set
     public String getTitle() {
         return title;

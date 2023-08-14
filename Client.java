@@ -8,6 +8,11 @@ public class Client {
         this.rg = rg;
     }
 
+    //Methods
+    public void StatusBarrow(){
+        System.out.println("Status para verificar empréstimos ativos");
+    }
+
     // Get and Set
     public String getName() {
         return name;
