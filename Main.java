@@ -26,5 +26,29 @@ public class Main {
         String name = myClient.getName();
         System.out.println(name + " primeira cliente da biblioteca.");
 
+<<<<<<< Updated upstream
+=======
+        //Instanciando o primeiro emprestimo
+        Borrow fisrtBorrow = new Borrow(
+                                    name, 
+                                    myClient.getRg(), 
+                                    myBook.getIsbn(), 
+                                    "05/07/2023", 
+                                    "17/07/2023", 
+                                    "within time");
+
+        String status = fisrtBorrow.getStatus();
+        System.out.println("Status do livro " + title + ": " + status);
+
+        //Instanciando um funcionario
+        Employee myEmployee = new Employee(
+                                    "Rogerio", 
+                                    4545, 
+                                    "recepcionista");
+
+        String employeeName = myEmployee.getName();
+        String employeePosition = myEmployee.getPosition();
+        System.out.println(employeeName + " é o novo funcionario e seu cargo e " + employeePosition);
+>>>>>>> Stashed changes
     }
 }
