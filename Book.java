@@ -4,16 +4,22 @@ public class Book {
     private String edition;
     private String language;
     private String author;
-    private String isbn;
+    private String company;
+    private int isbn;
+    private int pages;
+    private int age;
 
     //Constructor
-    public Book(String title, String description, String edition, String language, String author, String isbn) {
+    public Book(String title, String description, String edition, String language, String author, String company, int isbn, int pages, int age) {
         this.title = title;
         this.description = description;
         this.edition = edition;
         this.language = language;
         this.author = author;
+        this.company = company;
         this.isbn = isbn;
+        this.pages = pages;
+        this.age = age;
     }
 
     // Get and Set
@@ -52,10 +58,31 @@ public class Book {
         this.author = author;
     }
 
-     public String getIsbn() {
+    public String getCompany() {
+        return company;
+    }
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public int getIsbn() {
         return isbn;
     }
-    public void setIsbn(String isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
     }
 }
