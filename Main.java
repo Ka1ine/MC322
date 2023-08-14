@@ -26,5 +26,17 @@ public class Main {
         String name = myClient.getName();
         System.out.println(name + " primeira cliente da biblioteca.");
 
+        //Instanciando o primeiro emprestimo
+        Borrow fisrtBorrow = new Borrow(
+                                    name, 
+                                    myClient.getRg(), 
+                                    myBook.getIsbn(), 
+                                    "05/07/2023", 
+                                    "17/07/2023", 
+                                    "within time");
+
+        String status = fisrtBorrow.getStatus();
+        System.out.println("Status do livro " + title + ": " + status);
+
     }
 }
