@@ -26,8 +26,6 @@ public class Main {
         String name = myClient.getName();
         System.out.println(name + " primeira cliente da biblioteca.");
 
-<<<<<<< Updated upstream
-=======
         //Instanciando o primeiro emprestimo
         Borrow fisrtBorrow = new Borrow(
                                     name, 
@@ -49,6 +47,5 @@ public class Main {
         String employeeName = myEmployee.getName();
         String employeePosition = myEmployee.getPosition();
         System.out.println(employeeName + " é o novo funcionario e seu cargo e " + employeePosition);
->>>>>>> Stashed changes
     }
 }
