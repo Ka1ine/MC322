@@ -14,10 +14,7 @@ public class Main {
                                 16
                             );
 
-        String title = myBook.getTitle();
-        String author = myBook.getAuthor();
-
-        System.out.println("O livro " + title + " escrito por " + author + " foi o primeiro livro que chegou na bliblioteca.");
+        System.out.println("O livro " + myBook.title + " escrito por " + myBook.author + " foi o primeiro livro que chegou na bliblioteca.");
         
         
         //Instanciando a primeira cliente da biblioteca
@@ -30,13 +27,13 @@ public class Main {
         Borrow fisrtBorrow = new Borrow(
                                     name, 
                                     myClient.getRg(), 
-                                    myBook.getIsbn(), 
+                                    myBook.isbn, 
                                     "05/07/2023", 
                                     "17/07/2023", 
                                     "within time");
 
         String status = fisrtBorrow.getStatus();
-        System.out.println("Status do livro " + title + ": " + status);
+        System.out.println("Status do livro " + myBook.title + ": " + status);
 
         //Instanciando um funcionario
         Employee myEmployee = new Employee(
