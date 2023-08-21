@@ -24,15 +24,17 @@ public class Main {
         System.out.println(name + " primeira cliente da biblioteca.");
 
         //Instanciando o primeiro emprestimo
-        Borrow fisrtBorrow = new Borrow(
+        Borrow firstBorrow = new Borrow(
                                     name, 
                                     myClient.getRg(), 
                                     myBook.isbn, 
-                                    "05/07/2023", 
-                                    "17/07/2023", 
-                                    "within time");
+                                    5, 7, 2023);
 
-        String status = fisrtBorrow.getStatus();
+        String status = firstBorrow.getStatus();
+        System.out.println("Status do livro " + myBook.title + ": " + status);
+
+        firstBorrow.setTakeBackDate(15, 7, 2023);
+        status = firstBorrow.getStatus();
         System.out.println("Status do livro " + myBook.title + ": " + status);
 
         //Instanciando um funcionario
