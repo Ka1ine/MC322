@@ -1,30 +1,38 @@
-public class Borrow {
-    private String name;
-    private int rg;
-    int isbn;
-    String borrowDate;
-    String takeBackDate;
-    String status;
+import java.time.LocalDate;
 
-    //constructor
-    public Borrow(String name, int rg, int isbn, String borrowDate, String takeBackDate, String status){
+public class Borrow {
+    public String name;
+    private int rg;
+    public int isbn;
+    private LocalDate borrowDate;
+    private LocalDate takeBackDate;
+    private String status;
+
+    // Constructor
+    public Borrow(String name, int rg, int isbn, int borrowDay, int borrowMonth, int borrowYear){
         this.name = name;
         this.rg = rg;
         this.isbn = isbn;
-        this.borrowDate = borrowDate;
-        this.takeBackDate = takeBackDate;
-        this.status = status;
+        this.borrowDate = LocalDate.of(borrowYear, borrowMonth, borrowDay);
+        this.takeBackDate = null;
+        this.status = "available";
     }
 
-    //setters and getters
-    public String getName() {
-        return name;
+    // Methods
+    public void updateState(){
+        if(takeBackDate != null){
+            setStatus("available");
+        }else{
+            LocalDate shouldTakeBackDate = borrowDate.plusDays(15);
+            if(shouldTakeBackDate.isAfter(LocalDate.now())){
+                setStatus("Unavailable: Late");
+            }else{
+                setStatus("Unavailable");
+            }
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    // Setters and getters
     public int getRg() {
         return rg;
     }
@@ -33,35 +41,28 @@ public class Borrow {
         this.rg = rg;
     }
 
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getBorrowDate() {
-        return borrowDate;
-    }
-
-    public void setBorrowDate(String borrowDate) {
-        this.borrowDate = borrowDate;
-    }
-
-    public String getTakeBackDate() {
-        return takeBackDate;
-    }
-
-    public void setTakeBackDate(String takeBackDate) {
-        this.takeBackDate = takeBackDate;
-    }
-
     public String getStatus() {
+        updateState();
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDate getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(int day, int month, int year) {
+        this.borrowDate = LocalDate.of(year, month, day);
+    }
+
+    public LocalDate getTakeBackDate() {
+        return takeBackDate;
+    }
+
+    public void setTakeBackDate(int day, int month, int year) {
+        this.takeBackDate = LocalDate.of(year, month, day);
     }
 }
