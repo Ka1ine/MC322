@@ -1,13 +1,18 @@
+import java.time.LocalDate;
+
 public class Employee {
-    String name;
-    int id;
-    String position;
+    public String name;
+    private int id;
+    public String position;
+    private LocalDate bithdayDate;
+
 
     // constructor
-    public Employee(String name, int id, String position) {
+    public Employee(String name, int id, String position, int birthDay, int birthMonth, int birthYear) {
         this.name = name;
         this.id = id;
         this.position = position;
+        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
     }
 
     // getters and setters
@@ -19,19 +24,10 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public LocalDate getBithdayDate() {
+        return bithdayDate;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
+    public void setBithdayDate(int birthDay, int birthMonth, int birthYear) {
+        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
     }
 }

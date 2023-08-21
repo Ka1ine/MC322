@@ -14,38 +14,36 @@ public class Main {
                                 16
                             );
 
-        String title = myBook.getTitle();
-        String author = myBook.getAuthor();
-
-        System.out.println("O livro " + title + " escrito por " + author + " foi o primeiro livro que chegou na bliblioteca.");
+        System.out.println("O livro " + myBook.title + " escrito por " + myBook.author + " foi o primeiro livro que chegou na bliblioteca.");
         
         
         //Instanciando a primeira cliente da biblioteca
-        Client myClient = new Client("Maria", 1234);
+        Client myClient = new Client("Maria", 1234, 15, 06, 2001);
 
         String name = myClient.getName();
         System.out.println(name + " primeira cliente da biblioteca.");
 
         //Instanciando o primeiro emprestimo
-        Borrow fisrtBorrow = new Borrow(
+        Borrow firstBorrow = new Borrow(
                                     name, 
                                     myClient.getRg(), 
-                                    myBook.getIsbn(), 
-                                    "05/07/2023", 
-                                    "17/07/2023", 
-                                    "within time");
+                                    myBook.isbn, 
+                                    5, 7, 2023);
 
-        String status = fisrtBorrow.getStatus();
-        System.out.println("Status do livro " + title + ": " + status);
+        String status = firstBorrow.getStatus();
+        System.out.println("Status do livro " + myBook.title + ": " + status);
+
+        firstBorrow.setTakeBackDate(15, 7, 2023);
+        status = firstBorrow.getStatus();
+        System.out.println("Status do livro " + myBook.title + ": " + status);
 
         //Instanciando um funcionario
         Employee myEmployee = new Employee(
                                     "Rogerio", 
                                     4545, 
-                                    "recepcionista");
+                                    "recepcionista", 
+                                    27, 8, 1999);
 
-        String employeeName = myEmployee.getName();
-        String employeePosition = myEmployee.getPosition();
-        System.out.println(employeeName + " é o novo funcionario e seu cargo e " + employeePosition);
+        System.out.println(myEmployee.name + " é o novo funcionario e seu cargo e " + myEmployee.position);
     }
 }
