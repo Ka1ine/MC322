@@ -18,7 +18,7 @@ public class Main {
         
         
         //Instanciando a primeira cliente da biblioteca
-        Client myClient = new Client("Maria", 1234);
+        Client myClient = new Client("Maria", 1234, 15, 06, 2001);
 
         String name = myClient.getName();
         System.out.println(name + " primeira cliente da biblioteca.");
@@ -41,10 +41,9 @@ public class Main {
         Employee myEmployee = new Employee(
                                     "Rogerio", 
                                     4545, 
-                                    "recepcionista");
+                                    "recepcionista", 
+                                    27, 8, 1999);
 
-        String employeeName = myEmployee.getName();
-        String employeePosition = myEmployee.getPosition();
-        System.out.println(employeeName + " é o novo funcionario e seu cargo e " + employeePosition);
+        System.out.println(myEmployee.name + " é o novo funcionario e seu cargo e " + myEmployee.position);
     }
 }
