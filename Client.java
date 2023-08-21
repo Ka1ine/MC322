@@ -1,11 +1,15 @@
+import java.time.LocalDate;
+
 public class Client {
-    private String name;
+    public String name;
     private int rg;
+    private LocalDate bithdayDate;
 
     //Constructor
-    public Client(String name, int rg) {
+    public Client(String name, int rg, int birthDay, int birthMonth, int birthYear) {
         this.name = name;
         this.rg = rg;
+        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
     }
 
     //Methods
@@ -26,5 +30,12 @@ public class Client {
     }
     public void setRg(int rg) {
         this.rg = rg;
+    }
+
+    public LocalDate getBithdayDate() {
+        return bithdayDate;
+    }
+    public void setBithdayDate(int birthDay, int birthMonth, int birthYear) {
+        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
     }
 }
