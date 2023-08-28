@@ -1,21 +1,23 @@
 import java.time.LocalDate;
+import member.Student;
+import multimedia.Book;
 
 public class Borrow {
-    public String name;
-    private int rg;
     public int isbn;
     private LocalDate borrowDate;
     private LocalDate takeBackDate;
     private String status;
+    private Student[] student;
+    private Book[] book;
 
     // Constructor
-    public Borrow(String name, int rg, int isbn, int borrowDay, int borrowMonth, int borrowYear){
-        this.name = name;
-        this.rg = rg;
+    public Borrow(int isbn, int borrowDay, int borrowMonth, int borrowYear){
         this.isbn = isbn;
         this.borrowDate = LocalDate.of(borrowYear, borrowMonth, borrowDay);
         this.takeBackDate = null;
         this.status = "available";
+        student = new Student[1];
+        book = new Book[10];
     }
 
     // Methods
@@ -33,14 +35,6 @@ public class Borrow {
     }
 
     // Setters and getters
-    public int getRg() {
-        return rg;
-    }
-
-    public void setRg(int rg) {
-        this.rg = rg;
-    }
-
     public String getStatus() {
         updateState();
         return status;

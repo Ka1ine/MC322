@@ -1,0 +1,26 @@
+package multimidia;
+
+public class DVD {
+    public String title;
+    public String director;
+    public int releaseYear;
+    public int duration;
+    public boolean subtitles;
+
+    // Constructor
+    public DVD(String title, String director, int releaseYear, int duration, boolean subtitles) {
+        this.title = title;
+        this.director = director;
+        this.releaseYear = releaseYear;
+        this.duration = duration;
+        this.subtitles = subtitles;
+    }
+
+    //Methods
+    public void borrow(){
+        System.out.println("Pegando DVD");
+    }
+    public void giveBack(){
+        System.out.println("Devolvendo DVD");
+    }
+}
