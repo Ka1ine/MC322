@@ -1,3 +1,7 @@
+import member.Student;
+import member.Employee;
+import multimedia.Book;
+
 public class Main {
     public static void main(String[] arg){
 
@@ -18,15 +22,13 @@ public class Main {
         
         
         //Instanciando a primeira cliente da biblioteca
-        Client myClient = new Client("Maria", 1234, 15, 06, 2001);
+        Student myStudent = new Student("Maria", 1234, 15, 06, 2001);
 
-        String name = myClient.getName();
+        String name = myStudent.name;
         System.out.println(name + " primeira cliente da biblioteca.");
 
         //Instanciando o primeiro emprestimo
         Borrow firstBorrow = new Borrow(
-                                    name, 
-                                    myClient.getRg(), 
                                     myBook.isbn, 
                                     5, 7, 2023);
 
