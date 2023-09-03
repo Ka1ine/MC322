@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import member.Student;
-import multimedia.Book;
+import multimedia.Item;
 
 public class Borrow {
     public int isbn;
@@ -8,7 +8,7 @@ public class Borrow {
     private LocalDate takeBackDate;
     private String status;
     private Student[] student;
-    private Book[] book;
+    private Item[] book;
 
     // Constructor
     public Borrow(int isbn, int borrowDay, int borrowMonth, int borrowYear){
@@ -17,7 +17,7 @@ public class Borrow {
         this.takeBackDate = null;
         this.status = "available";
         student = new Student[1];
-        book = new Book[10];
+        book = new Item[10];
     }
 
     // Methods
