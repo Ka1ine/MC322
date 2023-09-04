@@ -1,23 +1,55 @@
 import member.Employee;
 import member.People;
+import member.Postgraduate;
+import member.Teacher;
+import member.Undergraduate;
 import multimedia.Item;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Borrow {
     private People person;
     private Item item;
     private Employee employee;
-    private String dataEmprestimo;
-    private String dataDevolucao;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
+    private String status;
 
     // Constructor
-    public Borrow(People person, Item item, Employee employee, String dataEmprestimo, String dataDevolucao) {
+    public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
         this.person = person;
         this.item = item;
         this.employee = employee;
         this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
+        this.dataDevolucao = null;
+        this.status = "em dia";
     }
 
+    //methods
+    public String getStatus(){
+        if(dataDevolucao == null){
+            LocalDate data;
+            if (person instanceof Undergraduate) {
+                data = dataEmprestimo.plusDays(15);
+            } else if (person instanceof Postgraduate) {
+                data = dataEmprestimo.plusDays(20);
+            } else if (person instanceof Teacher) {
+                data = dataEmprestimo.plusDays(30);
+            } else {
+                data = dataEmprestimo.plusDays(20);
+            };
+            if(LocalDate.now().compareTo(data) > 0) {
+                long atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
+                status = "atrasado " + -1 * atraso + " dias";
+            }
+        }else{
+            status = "devoldido";
+        }
+        return status;
+        
+    }
+
+    //Getters and Setters
     public People getPerson() {
         return person;
     }
@@ -42,23 +74,21 @@ public class Borrow {
         this.employee = employee;
     }
 
-    public String getDataEmprestimo() {
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
+        // return dataEmprestimo.toString();
     }
 
-    public void setDataEmprestimo(String dataEmprestimo) {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public String getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(String dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
-    
-    //Getters and Setters
-    
     
 }

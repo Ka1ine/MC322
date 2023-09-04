@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import member.Employee;
 import member.People;
 import member.Undergraduate;
@@ -53,11 +55,9 @@ public class Main {
             pessoa, 
             livro, 
             funcionario, 
-            "2023-09-03", 
-            "2023-09-10"
+            LocalDate.of(2023, 8, 2)
         );
-        
-        System.out.println("Data de emprestimo: " + emprestimo.getDataDevolucao());
+        System.out.println(emprestimo.getStatus());
 
     }
 }
