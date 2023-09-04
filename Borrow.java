@@ -45,8 +45,48 @@ public class Borrow {
         }else{
             status = "devoldido";
         }
-        return status;
-        
+        return status; 
+    }
+
+    public double calcularMulta(){
+        double multaPorDia = 0.0;
+    
+        if (person instanceof Undergraduate) {
+            multaPorDia = 1.0;
+        } else if (person instanceof Postgraduate) {
+            multaPorDia = 1.0;
+        } else if (person instanceof Teacher) {
+            multaPorDia = 0.5;
+        } else if (person instanceof Employee) {
+            multaPorDia = 0.75;
+        }
+        Long diasAtraso = calcularAtraso();
+        double diasAtrasoDouble = diasAtraso.doubleValue(); 
+        double multaTotal = multaPorDia * diasAtrasoDouble;
+    
+        return multaTotal;
+    }
+
+    public Long calcularAtraso() {
+        Long atraso = 0L;
+        if (dataDevolucao == null) {
+            LocalDate data;
+            if (person instanceof Undergraduate) {
+                data = dataEmprestimo.plusDays(15);
+            } else if (person instanceof Postgraduate) {
+                data = dataEmprestimo.plusDays(20);
+            } else if (person instanceof Teacher) {
+                data = dataEmprestimo.plusDays(30);
+            } else {
+                data = dataEmprestimo.plusDays(20);
+            }
+    
+            if (LocalDate.now().compareTo(data) > 0) {
+                atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
+                atraso = atraso * -1;
+            }
+        }
+        return atraso;
     }
 
     //Getters and Setters
