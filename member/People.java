@@ -1,7 +1,7 @@
 package member;
 import java.time.LocalDate;
 
-public class People {
+public abstract class People {
     private String name;
     private int universityIdentificationNumber;
     private String address;
