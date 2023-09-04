@@ -9,6 +9,9 @@ public class Postgraduate extends People {
             LocalDate registrationDate, String postGraduationCourse) {
         super(name, universityIdentificationNumber, address, contact, registrationDate);
         this.postGraduationCourse = postGraduationCourse;
+        this.borrowLimit = 5;
+        this.returnPeriod = 20;
+        this.feeValue = 1;
     }
 
     //Getters and Setters

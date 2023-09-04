@@ -17,12 +17,16 @@ public class Borrow {
 
     // Constructor
     public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
-        this.person = person;
-        this.item = item;
-        this.employee = employee;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = null;
-        this.status = "em dia";
+        if(person.getBorrowedNumber() < person.getBorrowLimit()){
+            this.person = person;
+            this.item = item;
+            this.employee = employee;
+            this.dataEmprestimo = dataEmprestimo;
+            this.dataDevolucao = null;
+            this.status = "em dia";
+        }else{
+            System.out.println("Impossible to borrow this item, person achieved the borrow limit");
+        }
     }
 
     //methods
