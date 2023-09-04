@@ -1,34 +1,21 @@
 package member;
 import java.time.LocalDate;
 
-public class Employee {
-    public String name;
-    private int id;
-    public String position;
-    private LocalDate bithdayDate;
+public class Employee extends People {
+    private String position;
 
-
-    // constructor
-    public Employee(String name, int id, String position, int birthDay, int birthMonth, int birthYear) {
-        this.name = name;
-        this.id = id;
+    // Constructor
+    public Employee(String name, int universityIdentificationNumber, String address, String contact,
+            LocalDate registrationDate, String position) {
+        super(name, universityIdentificationNumber, address, contact, registrationDate);
         this.position = position;
-        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
     }
 
-    // getters and setters
-    public int getId() {
-        return id;
+    //Getters and Setters
+    public String getPosition() {
+        return position;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDate getBithdayDate() {
-        return bithdayDate;
-    }
-    public void setBithdayDate(int birthDay, int birthMonth, int birthYear) {
-        this.bithdayDate = LocalDate.of(birthYear, birthMonth, birthDay);
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
