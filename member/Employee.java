@@ -9,6 +9,9 @@ public class Employee extends People {
             LocalDate registrationDate, String position) {
         super(name, universityIdentificationNumber, address, contact, registrationDate);
         this.position = position;
+        this.borrowLimit = 4;
+        this.returnPeriod = 20;
+        this.feeValue = 0.75;
     }
 
     //Getters and Setters

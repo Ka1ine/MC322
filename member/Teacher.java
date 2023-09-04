@@ -9,6 +9,9 @@ public class Teacher extends People {
             LocalDate registrationDate, String area) {
         super(name, universityIdentificationNumber, address, contact, registrationDate);
         this.area = area;
+        this.borrowLimit = 7;
+        this.returnPeriod = 30;
+        this.feeValue = 0.5;
     }
 
     //Getters and Setters
