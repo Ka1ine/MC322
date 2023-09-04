@@ -1,21 +1,22 @@
 import java.time.LocalDate;
-
 import member.Employee;
 import member.People;
+import member.Undergraduate;
 import multimedia.Book;
 
 public class Main {
     public static void main(String[] arg){
-        People pessoa = new People(
-        "João", 
-        12345, 
-        "Rua Exemplo, 123", 
-        "joao@example.com", 
-        LocalDate.of(
-            2023, 
-            9, 
-            3
-        )
+        Undergraduate pessoa = new Undergraduate(
+            "João", 
+            12345, 
+            "Rua Exemplo, 123", 
+            "joao@example.com", 
+            LocalDate.of(
+                2023, 
+                9, 
+                3
+            ),
+            "Engenharia"
         );
 
         Employee funcionario = new Employee(
