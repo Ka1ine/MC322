@@ -1,21 +1,22 @@
 package member;
+import java.time.LocalDate;
 
-public class Postgraduate extends Student {
-    public String researchTopic;
-    private int id;
+public class Postgraduate extends People {
+    private String postGraduationCourse;
 
     // Constructor
-    public Postgraduate(String name, int rg, int birthDay, int birthMonth, int birthYear, String researchTopic, int id) {
-        super(name, rg, birthDay, birthMonth, birthYear);
-        this.researchTopic = researchTopic;
-        this.id = id;
+    public Postgraduate(String name, int universityIdentificationNumber, String address, String contact,
+            LocalDate registrationDate, String postGraduationCourse) {
+        super(name, universityIdentificationNumber, address, contact, registrationDate);
+        this.postGraduationCourse = postGraduationCourse;
     }
 
-    //Methods
-    public int getRa() {
-        return id;
+    //Getters and Setters
+    public String getPostGraduationCourse() {
+        return postGraduationCourse;
     }
-    public void setRa(int id) {
-        this.id = id;
+
+    public void setPostGraduationCourse(String postGraduationCourse) {
+        this.postGraduationCourse = postGraduationCourse;
     }
 }

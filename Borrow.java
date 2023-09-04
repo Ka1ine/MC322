@@ -1,62 +1,64 @@
-import java.time.LocalDate;
-import member.Student;
-import multimedia.Book;
+import member.Employee;
+import member.People;
+import multimedia.Item;
 
 public class Borrow {
-    public int isbn;
-    private LocalDate borrowDate;
-    private LocalDate takeBackDate;
-    private String status;
-    private Student[] student;
-    private Book[] book;
+    private People person;
+    private Item item;
+    private Employee employee;
+    private String dataEmprestimo;
+    private String dataDevolucao;
 
     // Constructor
-    public Borrow(int isbn, int borrowDay, int borrowMonth, int borrowYear){
-        this.isbn = isbn;
-        this.borrowDate = LocalDate.of(borrowYear, borrowMonth, borrowDay);
-        this.takeBackDate = null;
-        this.status = "available";
-        student = new Student[1];
-        book = new Book[10];
+    public Borrow(People person, Item item, Employee employee, String dataEmprestimo, String dataDevolucao) {
+        this.person = person;
+        this.item = item;
+        this.employee = employee;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
     }
 
-    // Methods
-    public void updateState(){
-        if(takeBackDate != null){
-            setStatus("available");
-        }else{
-            LocalDate shouldTakeBackDate = borrowDate.plusDays(15);
-            if(shouldTakeBackDate.isAfter(LocalDate.now())){
-                setStatus("Unavailable: Late");
-            }else{
-                setStatus("Unavailable");
-            }
-        }
+    public People getPerson() {
+        return person;
     }
 
-    // Setters and getters
-    public String getStatus() {
-        updateState();
-        return status;
+    public void setPerson(People person) {
+        this.person = person;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public Item getItem() {
+        return item;
     }
 
-    public LocalDate getBorrowDate() {
-        return borrowDate;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public void setBorrowDate(int day, int month, int year) {
-        this.borrowDate = LocalDate.of(year, month, day);
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public LocalDate getTakeBackDate() {
-        return takeBackDate;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public void setTakeBackDate(int day, int month, int year) {
-        this.takeBackDate = LocalDate.of(year, month, day);
+    public String getDataEmprestimo() {
+        return dataEmprestimo;
     }
+
+    public void setDataEmprestimo(String dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public String getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+    
+    //Getters and Setters
+    
+    
 }
