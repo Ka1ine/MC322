@@ -1,51 +1,86 @@
-import member.Student;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import member.Employee;
+import member.People;
+import member.Teacher;
+import member.Undergraduate;
 import multimedia.Book;
 
 public class Main {
     public static void main(String[] arg){
+        Undergraduate aluno_graduacao = new Undergraduate(
+            "João", 
+            12345, 
+            "Rua Exemplo, 123", 
+            "joao@example.com", 
+            LocalDate.of(
+                2023, 
+                9, 
+                3
+            ),
+            "Engenharia"
+        );
 
-        // Instanciando o primeiro livro da biblioteca.
-        Book myBook = new Book(
-                                "A garota do lago", 
-                                "Summit Lake, uma pequena cidade entre montanhas", 
-                                "Padrão", 
-                                "Português", 
-                                "Charlie Donlea",
-                                "Faro Editorial",
-                                123,
-                                459,
-                                16
-                            );
+        Teacher professor = new Teacher(
+            "João", 
+            12345, 
+            "Rua Exemplo, 123", 
+            "joao@example.com", 
+            LocalDate.of(
+                2023, 
+                9, 
+                3
+            ),
+            "Física"
+        );
 
-        System.out.println("O livro " + myBook.title + " escrito por " + myBook.author + " foi o primeiro livro que chegou na bliblioteca.");
-        
-        
-        //Instanciando a primeira cliente da biblioteca
-        Student myStudent = new Student("Maria", 1234, 15, 06, 2001);
+        Employee funcionario = new Employee(
+            "Maria", 
+            54321, 
+            "Rua Exemplo, 456", 
+            "maria@example.com",
+            LocalDate.of(
+                2023, 
+                9, 
+                3
+            ), 
+            "Gerente de Projetos"
+        );
 
-        String name = myStudent.name;
-        System.out.println(name + " primeira cliente da biblioteca.");
+        Book livro = new Book(
+            "O Grande Gatsby", 
+            "F. Scott Fitzgerald", 
+            "Scribner", 
+            1925, 
+            "Ficção",
+            "Um romance sobre o Sonho Americano", 
+            "Inglês", 
+            "Capa dura", 
+            "978-3-16-148410-0", 
+            "Primeira Edição",
+            100, 
+            50, 
+            "Estante da Biblioteca 3A", 
+            "Bom estado"
+        );
 
-        //Instanciando o primeiro emprestimo
-        Borrow firstBorrow = new Borrow(
-                                    myBook.isbn, 
-                                    5, 7, 2023);
+        Borrow emprestimo_aluno = new Borrow(
+            aluno_graduacao, 
+            livro, 
+            funcionario, 
+            LocalDate.of(2023, 8, 2)
+        );
 
-        String status = firstBorrow.getStatus();
-        System.out.println("Status do livro " + myBook.title + ": " + status);
+        Borrow emprestimo_professor = new Borrow(
+            professor, 
+            livro, 
+            funcionario, 
+            LocalDate.of(2023, 8, 2)
+        );
 
-        firstBorrow.setTakeBackDate(15, 7, 2023);
-        status = firstBorrow.getStatus();
-        System.out.println("Status do livro " + myBook.title + ": " + status);
 
-        //Instanciando um funcionario
-        Employee myEmployee = new Employee(
-                                    "Rogerio", 
-                                    4545, 
-                                    "recepcionista", 
-                                    27, 8, 1999);
-
-        System.out.println(myEmployee.name + " é o novo funcionario e seu cargo e " + myEmployee.position);
+        System.out.println("Status: " + emprestimo_professor.getStatus());
+        System.out.println("Atraso: " + emprestimo_professor.calcularAtraso());
+        System.out.println("Multa: " + emprestimo_professor.calcularMulta());
     }
 }

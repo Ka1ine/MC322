@@ -1,20 +1,24 @@
 package member;
+import java.time.LocalDate;
 
-public class Undergraduate extends Student {
-    private int ra;
+public class Undergraduate extends People {
+    private String graduationCourse;
 
     // Constructor
-    public Undergraduate(String name, int rg, int birthDay, int birthMonth, int birthYear, int ra) {
-        super(name, rg, birthDay, birthMonth, birthYear);
-        this.ra = ra;
+    public Undergraduate(String name, int universityIdentificationNumber, String address, String contact,
+            LocalDate registrationDate, String graduationCourse) {
+        super(name, universityIdentificationNumber, address, contact, registrationDate);
+        this.graduationCourse = graduationCourse;
     }
 
-    //Methods
-    public int getRa() {
-        return ra;
+    //Getters and Setters
+    public String getGraduationCourse() {
+        return graduationCourse;
     }
-    public void setRa(int ra) {
-        this.ra = ra;
+
+    public void setGraduationCourse(String graduationCourse) {
+        this.graduationCourse = graduationCourse;
     }
+
 }
 

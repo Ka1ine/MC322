@@ -1,34 +1,60 @@
 package multimedia;
 
-public class Book {
-    public String title;
-    public String description;
-    public String edition;
-    public String language;
-    public String author;
-    public String company;
-    public int isbn;
-    public int pages;
-    public int age;
-
+public class Book extends Item{
+    private String isbn;
+    private String edition;
+    private int numberCopies;
+    private int avaliableCopies;
+    private String location;
+    private String conservation;
+    
     //Constructor
-    public Book(String title, String description, String edition, String language, String author, String company, int isbn, int pages, int age) {
-        this.title = title;
-        this.description = description;
-        this.edition = edition;
-        this.language = language;
-        this.author = author;
-        this.company = company;
+    public Book(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String isbn, String edition, int numberCopies, int avaliableCopies,
+            String location, String conservation) {
+        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.isbn = isbn;
-        this.pages = pages;
-        this.age = age;
+        this.edition = edition;
+        this.numberCopies = numberCopies;
+        this.avaliableCopies = avaliableCopies;
+        this.location = location;
+        this.conservation = conservation;
     }
 
-    //Methods
-    public void borrow(){
-        System.out.println("Pegando livro");
+    public String getIsbn() {
+        return isbn;
     }
-    public void giveBack(){
-        System.out.println("Devolvendo livro");
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public String getEdition() {
+        return edition;
+    }
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+    public int getNumberCopies() {
+        return numberCopies;
+    }
+    public void setNumberCopies(int numberCopies) {
+        this.numberCopies = numberCopies;
+    }
+    public int getAvaliableCopies() {
+        return avaliableCopies;
+    }
+    public void setAvaliableCopies(int avaliableCopies) {
+        this.avaliableCopies = avaliableCopies;
+    }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    public String getConservation() {
+        return conservation;
+    }
+    public void setConservation(String conservation) {
+        this.conservation = conservation;
     }
 }

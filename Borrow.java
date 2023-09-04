@@ -1,62 +1,134 @@
+import member.Employee;
+import member.People;
+import member.Postgraduate;
+import member.Teacher;
+import member.Undergraduate;
+import multimedia.Item;
 import java.time.LocalDate;
-import member.Student;
-import multimedia.Book;
+import java.time.temporal.ChronoUnit;
 
 public class Borrow {
-    public int isbn;
-    private LocalDate borrowDate;
-    private LocalDate takeBackDate;
+    private People person;
+    private Item item;
+    private Employee employee;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
     private String status;
-    private Student[] student;
-    private Book[] book;
 
     // Constructor
-    public Borrow(int isbn, int borrowDay, int borrowMonth, int borrowYear){
-        this.isbn = isbn;
-        this.borrowDate = LocalDate.of(borrowYear, borrowMonth, borrowDay);
-        this.takeBackDate = null;
-        this.status = "available";
-        student = new Student[1];
-        book = new Book[10];
+    public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
+        this.person = person;
+        this.item = item;
+        this.employee = employee;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = null;
+        this.status = "em dia";
     }
 
-    // Methods
-    public void updateState(){
-        if(takeBackDate != null){
-            setStatus("available");
+    //methods
+    public String getStatus(){
+        if(dataDevolucao == null){
+            LocalDate data;
+            if (person instanceof Undergraduate) {
+                data = dataEmprestimo.plusDays(15);
+            } else if (person instanceof Postgraduate) {
+                data = dataEmprestimo.plusDays(20);
+            } else if (person instanceof Teacher) {
+                data = dataEmprestimo.plusDays(30);
+            } else {
+                data = dataEmprestimo.plusDays(20);
+            };
+            if(LocalDate.now().compareTo(data) > 0) {
+                long atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
+                status = "atrasado " + -1 * atraso + " dias";
+            }
         }else{
-            LocalDate shouldTakeBackDate = borrowDate.plusDays(15);
-            if(shouldTakeBackDate.isAfter(LocalDate.now())){
-                setStatus("Unavailable: Late");
-            }else{
-                setStatus("Unavailable");
+            status = "devoldido";
+        }
+        return status; 
+    }
+
+    public double calcularMulta(){
+        double multaPorDia = 0.0;
+    
+        if (person instanceof Undergraduate) {
+            multaPorDia = 1.0;
+        } else if (person instanceof Postgraduate) {
+            multaPorDia = 1.0;
+        } else if (person instanceof Teacher) {
+            multaPorDia = 0.5;
+        } else if (person instanceof Employee) {
+            multaPorDia = 0.75;
+        }
+        Long diasAtraso = calcularAtraso();
+        double diasAtrasoDouble = diasAtraso.doubleValue(); 
+        double multaTotal = multaPorDia * diasAtrasoDouble;
+    
+        return multaTotal;
+    }
+
+    public Long calcularAtraso() {
+        Long atraso = 0L;
+        if (dataDevolucao == null) {
+            LocalDate data;
+            if (person instanceof Undergraduate) {
+                data = dataEmprestimo.plusDays(15);
+            } else if (person instanceof Postgraduate) {
+                data = dataEmprestimo.plusDays(20);
+            } else if (person instanceof Teacher) {
+                data = dataEmprestimo.plusDays(30);
+            } else {
+                data = dataEmprestimo.plusDays(20);
+            }
+    
+            if (LocalDate.now().compareTo(data) > 0) {
+                atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
+                atraso = atraso * -1;
             }
         }
+        return atraso;
     }
 
-    // Setters and getters
-    public String getStatus() {
-        updateState();
-        return status;
+    //Getters and Setters
+    public People getPerson() {
+        return person;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPerson(People person) {
+        this.person = person;
     }
 
-    public LocalDate getBorrowDate() {
-        return borrowDate;
+    public Item getItem() {
+        return item;
     }
 
-    public void setBorrowDate(int day, int month, int year) {
-        this.borrowDate = LocalDate.of(year, month, day);
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public LocalDate getTakeBackDate() {
-        return takeBackDate;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setTakeBackDate(int day, int month, int year) {
-        this.takeBackDate = LocalDate.of(year, month, day);
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
+
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+        // return dataEmprestimo.toString();
+    }
+
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+    
 }
