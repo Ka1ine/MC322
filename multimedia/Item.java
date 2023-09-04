@@ -1,17 +1,17 @@
 package multimedia;
 
 public abstract class Item {
-    public String title;
-    public String author;
-    public String publisher;
-    public String publishmentYear;
-    public String genre;
-    public String synopsis;
-    public String language;
-    public String cover;        //change type
+    private String title;
+    private String author;
+    private String publisher;
+    private int publishmentYear;
+    private String genre;
+    private String synopsis;
+    private String language;
+    private String cover;
 
     //Constructor
-    public Item(String title, String author, String publisher, String publishmentYear, String genre, 
+    public Item(String title, String author, String publisher, int publishmentYear, String genre, 
                 String synopsis, String language, String cover) {
         this.title = title;
         this.author = author;
@@ -23,11 +23,68 @@ public abstract class Item {
         this.cover = cover;
     }
 
-    //Methods
-    // public void borrow(){
-    //     System.out.println("Pegando livro");
-    // }
-    // public void giveBack(){
-    //     System.out.println("Devolvendo livro");
-    // }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getPublishmentYear() {
+        return publishmentYear;
+    }
+
+    public void setPublishmentYear(int publishmentYear) {
+        this.publishmentYear = publishmentYear;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
 }

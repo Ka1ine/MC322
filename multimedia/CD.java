@@ -1,27 +1,41 @@
 package multimedia;
 
 public class CD extends Item{
-    public String songs;
-    public int totalDurationSeconds;
-    // public String album;
-    // public boolean additionalTracks;
-    // public int launch;
-    public String gender;
+    private String songs;
+    private int totalDuration;
+    private String gender;
 
     //Constructor
-    public CD(String title, String author, String publisher, String publishmentYear, String genre, String synopsis,
-            String language, String cover, String songs, int totalDurationSeconds, String gender) {
+    public CD(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String songs, int totalDuration, String gender) {
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.songs = songs;
-        this.totalDurationSeconds = totalDurationSeconds;
+        this.totalDuration = totalDuration;
         this.gender = gender;
     }
 
-    //Methods
-    public void borrow(){
-        System.out.println("Pegando CD");
+    public String getSongs() {
+        return songs;
     }
-    public void giveBack(){
-        System.out.println("Devolvendo CD");
+
+    public void setSongs(String songs) {
+        this.songs = songs;
     }
+
+    public int getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(int totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
 }
