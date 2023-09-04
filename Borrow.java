@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-import member.Student;
+import member.People;
 import multimedia.Item;
 
 public class Borrow {
