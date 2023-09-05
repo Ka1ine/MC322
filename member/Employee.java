@@ -2,23 +2,23 @@ package member;
 import java.time.LocalDate;
 
 public class Employee extends People {
-    private String position;
+    private AuthorizationLevel authorizationLevel;
 
     // Constructor
     public Employee(String name, int universityIdentificationNumber, String address, String contact,
-            LocalDate registrationDate, String position) {
+            LocalDate registrationDate, AuthorizationLevel authorizationLevel) {
         super(name, universityIdentificationNumber, address, contact, registrationDate);
-        this.position = position;
+        this.authorizationLevel = authorizationLevel;
         this.borrowLimit = 4;
         this.returnPeriod = 20;
         this.feeValue = 0.75;
     }
 
     //Getters and Setters
-    public String getPosition() {
-        return position;
+    public AuthorizationLevel getAuthorizationLevel() {
+        return authorizationLevel;
     }
-    public void setPosition(String position) {
-        this.position = position;
+    public void setAuthorizationLevel(AuthorizationLevel authorizationLevel) {
+        this.authorizationLevel = authorizationLevel;
     }
 }

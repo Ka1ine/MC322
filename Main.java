@@ -1,7 +1,7 @@
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
+import member.AuthorizationLevel;
 import member.Employee;
-import member.People;
 import member.Teacher;
 import member.Undergraduate;
 import multimedia.Book;
@@ -34,17 +34,31 @@ public class Main {
             "Física"
         );
 
-        Employee funcionario = new Employee(
-            "Maria", 
-            54321, 
-            "Rua Exemplo, 456", 
-            "maria@example.com",
-            LocalDate.of(
-                2023, 
-                9, 
-                3
-            ), 
-            "Gerente de Projetos"
+        Employee adminFuncionario = new Employee(
+            "Admin", 
+            123456, 
+            "Address", 
+            "Contact", 
+            LocalDate.now(), 
+            AuthorizationLevel.ADMINISTRATOR
+        );
+
+        Employee attendantFuncionario = new Employee(
+            "Attendant", 
+            789012, 
+            "Address", 
+            "Contact", 
+            LocalDate.now(), 
+            AuthorizationLevel.ATTENDANT
+        );
+
+        Employee managerFuncionario = new Employee(
+            "Manager", 
+            345678, 
+            "Address", 
+            "Contact", 
+            LocalDate.now(), 
+            AuthorizationLevel.MANAGER
         );
 
         Book livro = new Book(
@@ -64,17 +78,10 @@ public class Main {
             "Bom estado"
         );
 
-        Borrow emprestimo_aluno = new Borrow(
-            aluno_graduacao, 
-            livro, 
-            funcionario, 
-            LocalDate.of(2023, 8, 2)
-        );
-
         Borrow emprestimo_professor = new Borrow(
             professor, 
             livro, 
-            funcionario, 
+            attendantFuncionario, 
             LocalDate.of(2023, 8, 2)
         );
 
@@ -82,5 +89,12 @@ public class Main {
         System.out.println("Status: " + emprestimo_professor.getStatus());
         System.out.println("Atraso: " + emprestimo_professor.calcularAtraso());
         System.out.println("Multa: " + emprestimo_professor.calcularMulta());
+
+        Borrow emprestimo_professor02 = new Borrow(
+            professor, 
+            livro, 
+            managerFuncionario, 
+            LocalDate.of(2023, 8, 2)
+        );
     }
 }

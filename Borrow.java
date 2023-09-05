@@ -1,3 +1,4 @@
+import member.AuthorizationLevel;
 import member.Employee;
 import member.People;
 import member.Postgraduate;
@@ -17,31 +18,26 @@ public class Borrow {
 
     // Constructor
     public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
-        if(person.getBorrowedNumber() < person.getBorrowLimit()){
-            this.person = person;
-            this.item = item;
-            this.employee = employee;
-            this.dataEmprestimo = dataEmprestimo;
-            this.dataDevolucao = null;
-            this.status = "em dia";
-        }else{
-            System.out.println("Impossible to borrow this item, person achieved the borrow limit");
+        if (AccessControl.canBorrowItem(employee)) {
+            if(person.getBorrowedNumber() < person.getBorrowLimit()){
+                this.person = person;
+                this.item = item;
+                this.employee = employee;
+                this.dataEmprestimo = dataEmprestimo;
+                this.dataDevolucao = null;
+                this.status = "em dia";
+            }else{
+                System.out.println("Impossible to borrow this item, person achieved the borrow limit");
+            }
+        } else {
+            System.out.println("Permission denied. The employee cannot borrow items.");
         }
     }
 
     //methods
     public String getStatus(){
         if(dataDevolucao == null){
-            LocalDate data;
-            if (person instanceof Undergraduate) {
-                data = dataEmprestimo.plusDays(15);
-            } else if (person instanceof Postgraduate) {
-                data = dataEmprestimo.plusDays(20);
-            } else if (person instanceof Teacher) {
-                data = dataEmprestimo.plusDays(30);
-            } else {
-                data = dataEmprestimo.plusDays(20);
-            };
+            LocalDate data = dataEmprestimo.plusDays(person.getReturnPeriod());
             if(LocalDate.now().compareTo(data) > 0) {
                 long atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
                 status = "atrasado " + -1 * atraso + " dias";
@@ -115,4 +111,11 @@ public class Borrow {
         this.dataDevolucao = dataDevolucao;
     }
     
+    public class AccessControl {
+        public static boolean canBorrowItem(Employee employee) {
+            return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
+                employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+        }
+    }
+
 }
