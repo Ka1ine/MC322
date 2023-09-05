@@ -96,5 +96,7 @@ public class Main {
             managerFuncionario, 
             LocalDate.of(2023, 8, 2)
         );
+        emprestimo_professor.returnItem(LocalDate.of(2023, 8, 5));
+        System.out.println(emprestimo_professor.getStatus());
     }
 }

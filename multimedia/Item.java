@@ -1,5 +1,7 @@
 package multimedia;
 
+import member.People;
+
 public abstract class Item {
     private String title;
     private String author;
@@ -11,6 +13,7 @@ public abstract class Item {
     private String cover;
     protected int numberCopies;
     protected int avaliableCopies;
+    private People reserved;
 
     //Constructor
     public Item(String title, String author, String publisher, int publishmentYear, String genre, 
@@ -23,6 +26,7 @@ public abstract class Item {
         this.synopsis = synopsis;
         this.language = language;
         this.cover = cover;
+        this.reserved = null;
     }
 
     public String getTitle() {
@@ -103,5 +107,13 @@ public abstract class Item {
 
     public void setAvaliableCopies(int avaliableCopies) {
         this.avaliableCopies = avaliableCopies;
+    }
+
+    public People getReserved() {
+        return reserved;
+    }
+
+    public void setReserved(People reserved) {
+        this.reserved = reserved;
     }
 }
