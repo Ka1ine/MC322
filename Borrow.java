@@ -20,12 +20,16 @@ public class Borrow {
     public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
         if (AccessControl.canBorrowItem(employee)) {
             if(person.getBorrowedNumber() < person.getBorrowLimit()){
-                this.person = person;
-                this.item = item;
-                this.employee = employee;
-                this.dataEmprestimo = dataEmprestimo;
-                this.dataDevolucao = null;
-                this.status = "em dia";
+                if(item.getAvaliableCopies() > 0){
+                    this.person = person;
+                    this.item = item;
+                    this.employee = employee;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.dataDevolucao = null;
+                    this.status = "em dia";
+                }else{
+                    System.out.println("Impossible to borrow this item, it is not avaliable");
+                }
             }else{
                 System.out.println("Impossible to borrow this item, person achieved the borrow limit");
             }
@@ -111,7 +115,7 @@ public class Borrow {
         this.dataDevolucao = dataDevolucao;
     }
     
-    public class AccessControl {
+    public static class AccessControl {
         public static boolean canBorrowItem(Employee employee) {
             return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
                 employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;

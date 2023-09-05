@@ -7,11 +7,13 @@ public class CD extends Item{
 
     //Constructor
     public CD(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String songs, int totalDuration, String gender) {
+            String language, String cover, String songs, int totalDuration, String gender, int numberCopies, int avaliableCopies) {
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.songs = songs;
         this.totalDuration = totalDuration;
         this.gender = gender;
+        this.numberCopies = numberCopies;
+        this.avaliableCopies = avaliableCopies;
     }
 
     public String getSongs() {

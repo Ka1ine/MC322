@@ -3,8 +3,6 @@ package multimedia;
 public class Book extends Item{
     private String isbn;
     private String edition;
-    private int numberCopies;
-    private int avaliableCopies;
     private String location;
     private String conservation;
     
@@ -15,10 +13,10 @@ public class Book extends Item{
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.isbn = isbn;
         this.edition = edition;
-        this.numberCopies = numberCopies;
-        this.avaliableCopies = avaliableCopies;
         this.location = location;
         this.conservation = conservation;
+        this.numberCopies = numberCopies;
+        this.avaliableCopies = avaliableCopies;
     }
 
     public String getIsbn() {
@@ -32,18 +30,6 @@ public class Book extends Item{
     }
     public void setEdition(String edition) {
         this.edition = edition;
-    }
-    public int getNumberCopies() {
-        return numberCopies;
-    }
-    public void setNumberCopies(int numberCopies) {
-        this.numberCopies = numberCopies;
-    }
-    public int getAvaliableCopies() {
-        return avaliableCopies;
-    }
-    public void setAvaliableCopies(int avaliableCopies) {
-        this.avaliableCopies = avaliableCopies;
     }
     public String getLocation() {
         return location;

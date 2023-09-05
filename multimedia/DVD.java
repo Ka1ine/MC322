@@ -12,7 +12,7 @@ public class DVD extends Item{
     // Constructor
     public DVD(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
             String language, String cover, String cast, int duration, String[] audio, String[] subtatles,
-            String director, int releaseYear, String conservation) {
+            String director, int releaseYear, String conservation, int numberCopies, int avaliableCopies) {
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.cast = cast;
         this.duration = duration;
@@ -21,6 +21,8 @@ public class DVD extends Item{
         this.director = director;
         this.releaseYear = releaseYear;
         this.conservation = conservation;
+        this.numberCopies = numberCopies;
+        this.avaliableCopies = avaliableCopies;
     }
 
     public String getCast() {

@@ -9,6 +9,8 @@ public abstract class Item {
     private String synopsis;
     private String language;
     private String cover;
+    protected int numberCopies;
+    protected int avaliableCopies;
 
     //Constructor
     public Item(String title, String author, String publisher, int publishmentYear, String genre, 
@@ -87,4 +89,19 @@ public abstract class Item {
         this.cover = cover;
     }
 
+    public int getNumberCopies() {
+        return numberCopies;
+    }
+
+    public void setNumberCopies(int numberCopies) {
+        this.numberCopies = numberCopies;
+    }
+
+    public int getAvaliableCopies() {
+        return avaliableCopies;
+    }
+
+    public void setAvaliableCopies(int avaliableCopies) {
+        this.avaliableCopies = avaliableCopies;
+    }
 }
