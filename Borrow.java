@@ -1,8 +1,6 @@
+import member.AuthorizationLevel;
 import member.Employee;
 import member.People;
-import member.Postgraduate;
-import member.Teacher;
-import member.Undergraduate;
 import multimedia.Item;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -13,80 +11,76 @@ public class Borrow {
     private Employee employee;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
+    private LocalDate shouldReturn;
     private String status;
+    private boolean renewed;
+    private double fee; 
 
     // Constructor
     public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
-        this.person = person;
-        this.item = item;
-        this.employee = employee;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = null;
-        this.status = "em dia";
+        if (AccessControl.canBorrowItem(employee)) {
+            if(person.getBorrowedNumber() < person.getBorrowLimit()){
+                if(item.getAvaliableCopies() > 0){
+                    this.person = person;
+                    this.item = item;
+                    this.employee = employee;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.dataDevolucao = null;
+                    this.shouldReturn = dataEmprestimo.plusDays(person.getReturnPeriod());
+                    this.status = "Regular";
+                    this.renewed = false;
+                    this.fee = 0;
+                }else{
+                    System.out.println("Impossible to borrow this item, it is not avaliable");
+                }
+            }else{
+                System.out.println("Impossible to borrow this item, person achieved the borrow limit");
+            }
+        } else {
+            System.out.println("Permission denied. The employee cannot borrow items.");
+        }
     }
 
     //methods
+    public double calcularMulta(){
+        double multaPorDia = person.getFeeValue();
+        double diasAtraso = calcularAtraso();
+        this.fee = multaPorDia * diasAtraso;
+        return this.fee;
+    }
+
+    public double calcularAtraso() {
+        double atraso = 0L;
+        if (dataDevolucao == null) {
+            atraso = ChronoUnit.DAYS.between(LocalDate.now(), shouldReturn);
+            atraso = atraso * -1;
+        }
+        return atraso;
+    }
+
     public String getStatus(){
         if(dataDevolucao == null){
-            LocalDate data;
-            if (person instanceof Undergraduate) {
-                data = dataEmprestimo.plusDays(15);
-            } else if (person instanceof Postgraduate) {
-                data = dataEmprestimo.plusDays(20);
-            } else if (person instanceof Teacher) {
-                data = dataEmprestimo.plusDays(30);
-            } else {
-                data = dataEmprestimo.plusDays(20);
-            };
-            if(LocalDate.now().compareTo(data) > 0) {
-                long atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
-                status = "atrasado " + -1 * atraso + " dias";
+            double atraso = calcularAtraso();
+            if(atraso > 0) {
+                calcularMulta();
+                status = "atrasado " + atraso + " dias";
             }
-        }else{
-            status = "devoldido";
         }
         return status; 
     }
-
-    public double calcularMulta(){
-        double multaPorDia = 0.0;
     
-        if (person instanceof Undergraduate) {
-            multaPorDia = 1.0;
-        } else if (person instanceof Postgraduate) {
-            multaPorDia = 1.0;
-        } else if (person instanceof Teacher) {
-            multaPorDia = 0.5;
-        } else if (person instanceof Employee) {
-            multaPorDia = 0.75;
-        }
-        Long diasAtraso = calcularAtraso();
-        double diasAtrasoDouble = diasAtraso.doubleValue(); 
-        double multaTotal = multaPorDia * diasAtrasoDouble;
-    
-        return multaTotal;
+    public void returnItem(LocalDate date){
+        getStatus();
+        this.dataDevolucao = date;
+        this.status = "Returned";
+        person.setTotalFee(person.getTotalFee() + calcularMulta());
     }
 
-    public Long calcularAtraso() {
-        Long atraso = 0L;
-        if (dataDevolucao == null) {
-            LocalDate data;
-            if (person instanceof Undergraduate) {
-                data = dataEmprestimo.plusDays(15);
-            } else if (person instanceof Postgraduate) {
-                data = dataEmprestimo.plusDays(20);
-            } else if (person instanceof Teacher) {
-                data = dataEmprestimo.plusDays(30);
-            } else {
-                data = dataEmprestimo.plusDays(20);
-            }
-    
-            if (LocalDate.now().compareTo(data) > 0) {
-                atraso = ChronoUnit.DAYS.between(LocalDate.now(), data);
-                atraso = atraso * -1;
-            }
+    public void renew(){
+        if(!this.renewed){
+            this.shouldReturn = this.shouldReturn.plusDays(person.getReturnPeriod());
+            this.renewed = true;
         }
-        return atraso;
     }
 
     //Getters and Setters
@@ -130,5 +124,24 @@ public class Borrow {
     public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+    public LocalDate getShouldReturn() {
+        return shouldReturn;
+    }
+
+    public void setFee(long fee) {
+        this.fee = fee;
+    }
+
+    public double getFee() {
+        return fee;
+    }
     
+    public static class AccessControl {
+        public static boolean canBorrowItem(Employee employee) {
+            return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
+                employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+        }
+    }
+
 }

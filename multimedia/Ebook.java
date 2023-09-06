@@ -12,7 +12,7 @@ public class Ebook extends Item {
     // Constructor
     public Ebook(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
             String language, String cover, String format, String numberLicences, String url, String requirements,
-            LocalDate avaliableDate, double fileSize) {
+            LocalDate avaliableDate, double fileSize, int numberCopies, int avaliableCopies) {
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.format = format;
         this.numberLicences = numberLicences;
@@ -20,6 +20,8 @@ public class Ebook extends Item {
         this.requirements = requirements;
         this.avaliableDate = avaliableDate;
         this.fileSize = fileSize;
+        this.numberCopies = numberCopies;
+        this.avaliableCopies = avaliableCopies;
     }
 
     public String getFormat() {

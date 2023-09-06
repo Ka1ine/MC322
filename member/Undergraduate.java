@@ -9,6 +9,9 @@ public class Undergraduate extends People {
             LocalDate registrationDate, String graduationCourse) {
         super(name, universityIdentificationNumber, address, contact, registrationDate);
         this.graduationCourse = graduationCourse;
+        this.borrowLimit = 3;
+        this.returnPeriod = 15;
+        this.feeValue = 1;
     }
 
     //Getters and Setters

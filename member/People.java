@@ -7,6 +7,11 @@ public abstract class People {
     private String address;
     private String contact;
     private LocalDate registrationDate;
+    protected int borrowLimit;
+    protected int returnPeriod;
+    protected double feeValue;
+    protected double totalFee;
+    protected int borrowedNumber;
 
     //Constructor
     public People(String name, int universityIdentificationNumber, String address, String contact,
@@ -16,6 +21,12 @@ public abstract class People {
         this.address = address;
         this.contact = contact;
         this.registrationDate = registrationDate;
+        this.borrowedNumber = 0;
+    }
+
+    //Methods
+    public void payFee(int paidValue){
+        setTotalFee(getTotalFee() - paidValue);
     }
 
     //Getters and Setters
@@ -52,6 +63,34 @@ public abstract class People {
     }
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public int getBorrowLimit() {
+        return borrowLimit;
+    }
+
+    public int getReturnPeriod() {
+        return returnPeriod;
+    }
+
+    public double getFeeValue() {
+        return feeValue;
+    }
+
+    public int getBorrowedNumber() {
+        return borrowedNumber;
+    }
+
+    public void setBorrowedNumber(int value) {
+        borrowedNumber = value;
+    }
+
+    public double getTotalFee() {
+        return totalFee;
+    }
+
+    public void setTotalFee(double totalFee) {
+        this.totalFee = totalFee;
     }
 
     
