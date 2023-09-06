@@ -52,8 +52,13 @@ public class Main {
         borrows.add(emprestimo03);
         Biblioteca.printBorrownsList(borrows);
 
+        livro01.setReserved(aluno_posgraduacao);
+        livro02.setReserved(aluno_graduacao);
+        livro03.setReserved(professor);
+
         LocalDate startDate = LocalDate.of(2023, 9, 1);
         LocalDate endDate = LocalDate.of(2023, 9, 5);
         Biblioteca.generateMemberActivityReport(aluno_graduacao, startDate, endDate, borrows);
+        Biblioteca.itemsReport(borrows);
     }
 }

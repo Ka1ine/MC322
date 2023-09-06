@@ -42,10 +42,11 @@ public class Borrow {
     }
 
     //methods
-    public void calcularMulta(){
+    public double calcularMulta(){
         double multaPorDia = person.getFeeValue();
         double diasAtraso = calcularAtraso();
         this.fee = multaPorDia * diasAtraso;
+        return this.fee;
     }
 
     public double calcularAtraso() {
@@ -72,6 +73,7 @@ public class Borrow {
         getStatus();
         this.dataDevolucao = date;
         this.status = "Returned";
+        person.setTotalFee(person.getTotalFee() + calcularMulta());
     }
 
     public void renew(){

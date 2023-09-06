@@ -10,6 +10,7 @@ public abstract class People {
     protected int borrowLimit;
     protected int returnPeriod;
     protected double feeValue;
+    protected double totalFee;
     protected int borrowedNumber;
 
     //Constructor
@@ -21,6 +22,11 @@ public abstract class People {
         this.contact = contact;
         this.registrationDate = registrationDate;
         this.borrowedNumber = 0;
+    }
+
+    //Methods
+    public void payFee(int paidValue){
+        setTotalFee(getTotalFee() - paidValue);
     }
 
     //Getters and Setters
@@ -77,6 +83,14 @@ public abstract class People {
 
     public void setBorrowedNumber(int value) {
         borrowedNumber = value;
+    }
+
+    public double getTotalFee() {
+        return totalFee;
+    }
+
+    public void setTotalFee(double totalFee) {
+        this.totalFee = totalFee;
     }
 
     
