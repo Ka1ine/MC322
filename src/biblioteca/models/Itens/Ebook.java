@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 public class Ebook extends Item {
     private String format; 
-    private String numberLicences; 
+    private int numberLicences; 
     private String url; 
     private String requirements; 
     private LocalDate avaliableDate;
@@ -11,7 +11,7 @@ public class Ebook extends Item {
 
     // Constructor
     public Ebook(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String format, String numberLicences, String url, String requirements,
+            String language, String cover, String format, int numberLicences, String url, String requirements,
             LocalDate avaliableDate, double fileSize, int numberCopies, int avaliableCopies) {
         super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
         this.format = format;
@@ -32,11 +32,11 @@ public class Ebook extends Item {
         this.format = format;
     }
 
-    public String getNumberLicences() {
+    public int getNumberLicences() {
         return numberLicences;
     }
 
-    public void setNumberLicences(String numberLicences) {
+    public void setNumberLicences(int numberLicences) {
         this.numberLicences = numberLicences;
     }
 

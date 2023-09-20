@@ -2,8 +2,15 @@ package main;
 
 import biblioteca.controllers.*;
 import biblioteca.models.*;
+import biblioteca.models.Itens.Book;
+import biblioteca.models.Itens.CD;
+import biblioteca.models.Itens.DVD;
+import biblioteca.models.Itens.Ebook;
+import biblioteca.models.Itens.Item;
+import biblioteca.models.Itens.OtherMedia;
 import biblioteca.views.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +27,7 @@ public class BibliotecaMain {
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
         // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
+        Library biblioteca = new Library();
 
         Scanner scanner = new Scanner(System.in);
         
@@ -41,7 +49,7 @@ public class BibliotecaMain {
             switch (opcao) {
                 case 1:
                     // Menu de Gerenciamento de Itens
-                    menuGerenciamentoItens(scanner, bibliotecaView);
+                    menuGerenciamentoItens(scanner, bibliotecaView, biblioteca);
                     break;
                 case 2:
                     // Menu de Gerenciamento de Membros
@@ -65,7 +73,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuGerenciamentoItens(Scanner scanner, BibliotecaView bibliotecaView) {
+    private static void menuGerenciamentoItens(Scanner scanner, BibliotecaView bibliotecaView, Library biblioteca) {
         while (true) {
             System.out.println("---- Menu Gerenciamento de Itens ----");
             System.out.println();
@@ -86,11 +94,10 @@ public class BibliotecaMain {
 
             switch (opcaoItens) {
                 case 1:
-                    List<ItemMultimidia> itens = bibliotecaController.consultarItensDisponiveis();
-                    bibliotecaView.mostrarItensDisponiveis(itens);
+                    biblioteca.printItemsList(biblioteca.getItems());
                     break;
                 case 2:
-                    adicionarItem(scanner);
+                    adicionarItem(scanner, biblioteca);
                     break;
                 case 3:
                     editarItem(scanner);
@@ -263,9 +270,134 @@ public class BibliotecaMain {
     }
 
     // Métodos para adicionar, editar e remover itens e membros
-    private static void adicionarItem(Scanner scanner) {
-        // Lógica para adicionar um novo item
-        System.out.println("Operação de Adição de Item");
+    private static void adicionarItem(Scanner scanner, Library biblioteca) {
+        System.out.println("---- Qual item deseja adicionar ----");
+            System.out.println();
+            System.out.println("1. Livro");
+            System.out.println("2. Ebook");
+            System.out.println("3. CD");
+            System.out.println("4. DVD");
+            System.out.println("5. Outro");
+            System.out.println("6. Voltar");
+            System.out.println();
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+        int qualItem = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Digite o titulo:");
+        String titulo = scanner.nextLine();
+        System.out.println("Digite o autor:");
+        String autor = scanner.nextLine();
+        System.out.println("Digite a editora:");
+        String editora = scanner.nextLine();
+        System.out.println("Digite o ano de publicacao:");
+        int anoPublicacao = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o genero:");
+        String genero = scanner.nextLine();
+        System.out.println("Digite o sinopse:");
+        String sinopse = scanner.nextLine();
+        System.out.println("Digite a lingua:");
+        String lingua = scanner.nextLine();
+        System.out.println("Insira a capa:");
+        String capa = scanner.nextLine();
+        System.out.println("Digite o numero de copias:");
+        int numeroCopias = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite quantas copias estao disponiveis:");
+        int copiasDisponiveis = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite os detalhes:");
+        String detalhes = scanner.nextLine();
+
+        switch(qualItem){
+            case 1:
+                System.out.println("Digite o ISBN:");
+                String isbn = scanner.nextLine();
+                System.out.println("Digite a Edicao:");
+                String edicao = scanner.nextLine();
+                System.out.println("Digite a localizacao na biblioteca:");
+                String localizacao = scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacao = scanner.nextLine();
+                Book novoBook = new Book(titulo, autor, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, isbn, edicao, numeroCopias, copiasDisponiveis, localizacao, conservacao);
+                biblioteca.addItem(novoBook);
+                break;
+            case 2:
+                System.out.println("Digite o formato:");
+                String formato = scanner.nextLine();
+                System.out.println("Digite o numero de licensas:");
+                int numeroLicensas = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite o URL:");
+                String url = scanner.nextLine();
+                System.out.println("Digite os requisitos da maquina:");
+                String requisitos = scanner.nextLine();
+                System.out.println("Digite a data disponível:(dia/mes/ano)");
+                int dia = scanner.nextInt();
+                int mes = scanner.nextInt();
+                int ano = scanner.nextInt();
+                LocalDate dataDisponivel = LocalDate.of(ano, mes, dia);
+                System.out.println("Digite o tamanho do arquivo:(kb)");
+                double tamanhoArquivo = scanner.nextDouble();
+                scanner.nextLine();
+                Ebook novoEbook = new Ebook(titulo, autor, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, formato, numeroLicensas, url, requisitos, dataDisponivel, tamanhoArquivo, numeroCopias, 
+                copiasDisponiveis);
+                biblioteca.addItem(novoEbook);
+                break;
+            case 3:
+                System.out.println("Digite as musicas:");
+                String musicas = scanner.nextLine();
+                System.out.println("Digite a duracao total:(em minutos)");
+                int duracao = scanner.nextInt();
+                scanner.nextLine();
+                CD novoCD = new CD(titulo, autor, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, musicas, duracao, numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoCD);
+                break;
+            case 4:
+                System.out.println("Digite o elenco:");
+                String elenco = scanner.nextLine();
+                System.out.println("Digite a duracao total:(em minutos)");
+                int duracaoDVD = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite os audios disponiveis:");
+                String audios = scanner.nextLine();
+                System.out.println("Digite as legendas disponiveis:");
+                String legendas = scanner.nextLine();
+                System.out.println("Digite o diretor:");
+                String diretor = scanner.nextLine();
+                System.out.println("Digite o ano de lancamento");
+                int anoLancamento = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacaoDVD = scanner.nextLine();
+                DVD novoDVD = new DVD(titulo, autor, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, elenco, duracaoDVD, audios, legendas, diretor, anoLancamento, conservacaoDVD, 
+                numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoDVD);
+                break;
+            case 5:
+                System.out.println("Digite o tipo da midia:");
+                String tipo = scanner.nextLine();
+                System.out.println("Digite o formato da midia:");
+                String formatoMidia = scanner.nextLine();
+                System.out.println("Digite o local na biblioteca:");
+                String localizacaoMidia = scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacaoMidia = scanner.nextLine();
+                OtherMedia novoOtherMedia = new OtherMedia(titulo, autor, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, tipo, formatoMidia, localizacaoMidia, conservacaoMidia, numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoOtherMedia);
+                break;
+            case 6:
+                return;
+            default:
+                System.out.println("Opção inválida. Por favor, escolha novamente.");
+        }
     }
 
     private static void editarItem(Scanner scanner) {

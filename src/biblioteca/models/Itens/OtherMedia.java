@@ -8,9 +8,9 @@ public class OtherMedia extends Item {
     
     //Constructor
     public OtherMedia(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String type, String format, String location, String conservation,
+            String language, String cover, String detalhes, String type, String format, String location, String conservation,
             int numberCopies, int avaliableCopies) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
+        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.type = type;
         this.format = format;
         this.location = location;
