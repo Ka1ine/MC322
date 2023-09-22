@@ -5,6 +5,7 @@ import biblioteca.models.Membros.People;
 public abstract class Item {
     private String title;
     private String author;
+    private int codigo;
     private String publisher;
     private int publishmentYear;
     private String genre;
@@ -17,7 +18,7 @@ public abstract class Item {
     private String detalhes;
 
     //Constructor
-    public Item(String title, String author, String publisher, int publishmentYear, String genre, 
+    public Item(String title, String author, int codigo, String publisher, int publishmentYear, String genre, 
                 String synopsis, String language, String cover, String detalhes) {
         this.title = title;
         this.author = author;
@@ -49,6 +50,14 @@ public abstract class Item {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 
     public String getPublisher() {

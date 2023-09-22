@@ -7,10 +7,10 @@ public class OtherMedia extends Item {
     private String conservation;
     
     //Constructor
-    public OtherMedia(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
+    public OtherMedia(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
             String language, String cover, String detalhes, String type, String format, String location, String conservation,
             int numberCopies, int avaliableCopies) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
+        super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.type = type;
         this.format = format;
         this.location = location;

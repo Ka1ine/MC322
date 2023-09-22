@@ -1,13 +1,12 @@
 package biblioteca.models.Membros;
-import java.time.LocalDate;
 
 public class Teacher extends People {
     private String area;
 
     // Constructor
     public Teacher(String name, int universityIdentificationNumber, String address, String contact,
-            LocalDate registrationDate, String area) {
-        super(name, universityIdentificationNumber, address, contact, registrationDate);
+            String area) {
+        super(name, universityIdentificationNumber, address, contact);
         this.area = area;
         this.borrowLimit = 7;
         this.returnPeriod = 30;

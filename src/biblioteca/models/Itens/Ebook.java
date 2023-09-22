@@ -10,10 +10,10 @@ public class Ebook extends Item {
     private double fileSize; 
 
     // Constructor
-    public Ebook(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String format, int numberLicences, String url, String requirements,
+    public Ebook(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String detalhes, String format, int numberLicences, String url, String requirements,
             LocalDate avaliableDate, double fileSize, int numberCopies, int avaliableCopies) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
+        super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.format = format;
         this.numberLicences = numberLicences;
         this.url = url;

@@ -5,9 +5,9 @@ public class CD extends Item{
     private int totalDuration;
 
     //Constructor
-    public CD(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String songs, int totalDuration, int numberCopies, int avaliableCopies) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
+    public CD(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String detalhes, String songs, int totalDuration, int numberCopies, int avaliableCopies) {
+        super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.songs = songs;
         this.totalDuration = totalDuration;
         this.numberCopies = numberCopies;
