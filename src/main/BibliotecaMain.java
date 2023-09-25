@@ -485,6 +485,8 @@ public class BibliotecaMain {
         for(Item item : biblioteca.getItems()){
             if(item.getCodigo() == codigo){
                 biblioteca.getItems().remove(item);
+                System.out.println("Livro " + item.getTitle() + " removido");
+                return;
             }
         }
 
