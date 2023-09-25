@@ -68,7 +68,6 @@ public class Library {
         System.out.println("Lista de Livros:");
         for (Item item : items) {
             System.out.println("Nome: " + item.getTitle());
-            System.out.println("----------------------------------");
         }
     }
 
@@ -76,7 +75,6 @@ public class Library {
         System.out.println("Lista de Emprestimos:");
         for (Borrow borrow : borrows) {
             System.out.println("Status emprestimos: " + borrow.getStatus());
-            System.out.println("----------------------------------");
         }
     }
 

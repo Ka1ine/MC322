@@ -23,6 +23,7 @@ public abstract class Item {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
+        this.codigo = codigo;
         this.publishmentYear = publishmentYear;
         this.genre = genre;
         this.synopsis = synopsis;
@@ -30,10 +31,6 @@ public abstract class Item {
         this.cover = cover;
         this.reserved = null;
         this.detalhes = detalhes;
-    }
-
-    public Item(String title2, String author2, String publisher2, int publishmentYear2, String genre2, String synopsis2,
-            String language2, String cover2) {
     }
 
     public String getTitle() {
