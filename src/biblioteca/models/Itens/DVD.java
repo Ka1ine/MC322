@@ -3,21 +3,21 @@ package biblioteca.models.Itens;
 public class DVD extends Item{
     private String cast;
     private int duration;
-    private String audio[];
-    private String subtatles[];
+    private String audio;
+    private String subtitles;
     private String director;
     private int releaseYear;
     private String conservation; 
 
     // Constructor
-    public DVD(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String cast, int duration, String[] audio, String[] subtatles,
+    public DVD(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String detalhes, String cast, int duration, String audio, String subtitles,
             String director, int releaseYear, String conservation, int numberCopies, int avaliableCopies) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
+        super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.cast = cast;
         this.duration = duration;
         this.audio = audio;
-        this.subtatles = subtatles;
+        this.subtitles = subtitles;
         this.director = director;
         this.releaseYear = releaseYear;
         this.conservation = conservation;
@@ -41,20 +41,20 @@ public class DVD extends Item{
         this.duration = duration;
     }
 
-    public String[] getAudio() {
+    public String getAudio() {
         return audio;
     }
 
-    public void setAudio(String[] audio) {
+    public void setAudio(String audio) {
         this.audio = audio;
     }
 
-    public String[] getSubtatles() {
-        return subtatles;
+    public String getSubtatles() {
+        return subtitles;
     }
 
-    public void setSubtatles(String[] subtatles) {
-        this.subtatles = subtatles;
+    public void setSubtatles(String subtitles) {
+        this.subtitles = subtitles;
     }
 
     public String getDirector() {

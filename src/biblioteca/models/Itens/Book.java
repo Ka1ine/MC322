@@ -7,10 +7,10 @@ public class Book extends Item{
     private String conservation;
     
     //Constructor
-    public Book(String title, String author, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String isbn, String edition, int numberCopies, int avaliableCopies,
+    public Book(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
+            String language, String cover, String detalhes, String isbn, String edition, int numberCopies, int avaliableCopies,
             String location, String conservation) {
-        super(title, author, publisher, publishmentYear, genre, synopsis, language, cover);
+        super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.isbn = isbn;
         this.edition = edition;
         this.location = location;

@@ -2,8 +2,20 @@ package main;
 
 import biblioteca.controllers.*;
 import biblioteca.models.*;
+import biblioteca.models.Itens.Book;
+import biblioteca.models.Itens.CD;
+import biblioteca.models.Itens.DVD;
+import biblioteca.models.Itens.Ebook;
+import biblioteca.models.Itens.Item;
+import biblioteca.models.Itens.OtherMedia;
+import biblioteca.models.Membros.AuthorizationLevel;
+import biblioteca.models.Membros.Employee;
+import biblioteca.models.Membros.Postgraduate;
+import biblioteca.models.Membros.Teacher;
+import biblioteca.models.Membros.Undergraduate;
 import biblioteca.views.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +32,8 @@ public class BibliotecaMain {
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
         // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
+        Library biblioteca = new Library();
+        
 
         Scanner scanner = new Scanner(System.in);
         
@@ -41,11 +55,11 @@ public class BibliotecaMain {
             switch (opcao) {
                 case 1:
                     // Menu de Gerenciamento de Itens
-                    menuGerenciamentoItens(scanner, bibliotecaView);
+                    menuGerenciamentoItens(scanner, bibliotecaView, biblioteca);
                     break;
                 case 2:
                     // Menu de Gerenciamento de Membros
-                    menuGerenciamentoMembros(scanner, membroView);
+                    menuGerenciamentoMembros(scanner, membroView, biblioteca);
                     break;
                 case 3:
                     // Menu de Geração de Relatórios e Estatísticas
@@ -65,7 +79,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuGerenciamentoItens(Scanner scanner, BibliotecaView bibliotecaView) {
+    private static void menuGerenciamentoItens(Scanner scanner, BibliotecaView bibliotecaView, Library biblioteca) {
         while (true) {
             System.out.println("---- Menu Gerenciamento de Itens ----");
             System.out.println();
@@ -86,17 +100,16 @@ public class BibliotecaMain {
 
             switch (opcaoItens) {
                 case 1:
-                    List<ItemMultimidia> itens = bibliotecaController.consultarItensDisponiveis();
-                    bibliotecaView.mostrarItensDisponiveis(itens);
+                    biblioteca.printItemsList(biblioteca.getItems());
                     break;
                 case 2:
-                    adicionarItem(scanner);
+                    adicionarItem(scanner, biblioteca);
                     break;
                 case 3:
-                    editarItem(scanner);
+                    editarItem(scanner, biblioteca);
                     break;
                 case 4:
-                    removerItem(scanner);
+                    removerItem(scanner, biblioteca);
                     break;
                 case 5:
                     realizarEmprestimo(scanner);
@@ -115,7 +128,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuGerenciamentoMembros(Scanner scanner, MembroView membroView) {
+    private static void menuGerenciamentoMembros(Scanner scanner, MembroView membroView, Library biblioteca) {
         while (true) {
             System.out.println("---- Menu Gerenciamento de Membros ----");
             System.out.println();
@@ -137,7 +150,7 @@ public class BibliotecaMain {
                     membroView.mostrarListaMembros(membros);
                     break;
                 case 2:
-                    adicionarMembro(scanner);
+                    adicionarMembro(scanner, biblioteca);
                     break;
                 case 3:
                     editarMembro(scanner);
@@ -263,24 +276,302 @@ public class BibliotecaMain {
     }
 
     // Métodos para adicionar, editar e remover itens e membros
-    private static void adicionarItem(Scanner scanner) {
-        // Lógica para adicionar um novo item
-        System.out.println("Operação de Adição de Item");
+    private static void adicionarItem(Scanner scanner, Library biblioteca) {
+        System.out.println("---- Qual item deseja adicionar ----");
+            System.out.println();
+            System.out.println("1. Livro");
+            System.out.println("2. Ebook");
+            System.out.println("3. CD");
+            System.out.println("4. DVD");
+            System.out.println("5. Outro");
+            System.out.println("6. Voltar");
+            System.out.println();
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+        int qualItem = scanner.nextInt();
+        scanner.nextLine();
+
+        if(qualItem == 6) return;
+
+        System.out.println("Digite o titulo:");
+        String titulo = scanner.nextLine();
+        System.out.println("Digite o autor:");
+        String autor = scanner.nextLine();
+        System.out.println("Digite o codigo do item:");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a editora:");
+        String editora = scanner.nextLine();
+        System.out.println("Digite o ano de publicacao:");
+        int anoPublicacao = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o genero:");
+        String genero = scanner.nextLine();
+        System.out.println("Digite o sinopse:");
+        String sinopse = scanner.nextLine();
+        System.out.println("Digite a lingua:");
+        String lingua = scanner.nextLine();
+        System.out.println("Insira a capa:");
+        String capa = scanner.nextLine();
+        System.out.println("Digite o numero de copias:");
+        int numeroCopias = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite quantas copias estao disponiveis:");
+        int copiasDisponiveis = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite os detalhes:");
+        String detalhes = scanner.nextLine();
+
+        switch(qualItem){
+            case 1:
+                System.out.println("Digite o ISBN:");
+                String isbn = scanner.nextLine();
+                System.out.println("Digite a Edicao:");
+                String edicao = scanner.nextLine();
+                System.out.println("Digite a localizacao na biblioteca:");
+                String localizacao = scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacao = scanner.nextLine();
+                Book novoBook = new Book(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, isbn, edicao, numeroCopias, copiasDisponiveis, localizacao, conservacao);
+                biblioteca.addItem(novoBook);
+                break;
+            case 2:
+                System.out.println("Digite o formato:");
+                String formato = scanner.nextLine();
+                System.out.println("Digite o numero de licensas:");
+                int numeroLicensas = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite o URL:");
+                String url = scanner.nextLine();
+                System.out.println("Digite os requisitos da maquina:");
+                String requisitos = scanner.nextLine();
+                System.out.println("Digite a data disponível:(dia/mes/ano)");
+                int dia = scanner.nextInt();
+                int mes = scanner.nextInt();
+                int ano = scanner.nextInt();
+                LocalDate dataDisponivel = LocalDate.of(ano, mes, dia);
+                System.out.println("Digite o tamanho do arquivo:(kb)");
+                double tamanhoArquivo = scanner.nextDouble();
+                scanner.nextLine();
+                Ebook novoEbook = new Ebook(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, formato, numeroLicensas, url, requisitos, dataDisponivel, tamanhoArquivo, numeroCopias, 
+                copiasDisponiveis);
+                biblioteca.addItem(novoEbook);
+                break;
+            case 3:
+                System.out.println("Digite as musicas:");
+                String musicas = scanner.nextLine();
+                System.out.println("Digite a duracao total:(em minutos)");
+                int duracao = scanner.nextInt();
+                scanner.nextLine();
+                CD novoCD = new CD(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, musicas, duracao, numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoCD);
+                break;
+            case 4:
+                System.out.println("Digite o elenco:");
+                String elenco = scanner.nextLine();
+                System.out.println("Digite a duracao total:(em minutos)");
+                int duracaoDVD = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite os audios disponiveis:");
+                String audios = scanner.nextLine();
+                System.out.println("Digite as legendas disponiveis:");
+                String legendas = scanner.nextLine();
+                System.out.println("Digite o diretor:");
+                String diretor = scanner.nextLine();
+                System.out.println("Digite o ano de lancamento");
+                int anoLancamento = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacaoDVD = scanner.nextLine();
+                DVD novoDVD = new DVD(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, elenco, duracaoDVD, audios, legendas, diretor, anoLancamento, conservacaoDVD, 
+                numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoDVD);
+                break;
+            case 5:
+                System.out.println("Digite o tipo da midia:");
+                String tipo = scanner.nextLine();
+                System.out.println("Digite o formato da midia:");
+                String formatoMidia = scanner.nextLine();
+                System.out.println("Digite o local na biblioteca:");
+                String localizacaoMidia = scanner.nextLine();
+                System.out.println("Digite o estado de conservacao:");
+                String conservacaoMidia = scanner.nextLine();
+                OtherMedia novoOtherMedia = new OtherMedia(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
+                capa, detalhes, tipo, formatoMidia, localizacaoMidia, conservacaoMidia, numeroCopias, copiasDisponiveis);
+                biblioteca.addItem(novoOtherMedia);
+                break;
+            default:
+                System.out.println("Opção inválida. Por favor, escolha novamente.");
+        }
     }
 
-    private static void editarItem(Scanner scanner) {
-        // Lógica para editar um item existente
-        System.out.println("Operação de Edição de Item");
+    private static void editarItem(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite o codigo do item que deseja editar:");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("---- O que deseja editar nesse item? ----");
+            System.out.println();
+            System.out.println("1. Titulo");
+            System.out.println("2. Autor");
+            System.out.println("3. Editora");
+            System.out.println("4. Ano de publicacao");
+            System.out.println("5. Genero");
+            System.out.println("6. Sinopse");
+            System.out.println("7. Lingua");
+            System.out.println("8. Capa");
+            System.out.println("9. Numero de copias");
+            System.out.println("10. Copias disponiveis");
+            System.out.println("11. detalhes");
+            System.out.println("12. Voltar");
+            System.out.println();
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+        int atributo = scanner.nextInt();
+        scanner.nextLine();
+        if(atributo == 12) return;
+        
+        System.out.println("`Digite o novo valor desse atributo:");
+        String novoValor = scanner.nextLine();
+
+        for(Item item : biblioteca.getItems()){
+            if(item.getCodigo() == codigo){
+                switch(atributo){
+                    case 1:
+                        item.setTitle(novoValor);
+                        break;
+                    case 2:
+                        item.setAuthor(novoValor);
+                        break;
+                    case 3:
+                        item.setPublisher(novoValor);
+                        break;
+                    case 4:
+                        item.setPublishmentYear(Integer.parseInt(novoValor));
+                        break;
+                    case 5:
+                        item.setGenre(novoValor);
+                        break;
+                    case 6:
+                        item.setSynopsis(novoValor);
+                        break;
+                    case 7:
+                        item.setLanguage(novoValor);
+                        break;
+                    case 8:
+                        item.setCover(novoValor);
+                        break;
+                    case 9:
+                        item.setNumberCopies(Integer.parseInt(novoValor));
+                        break;
+                    case 10:
+                        item.setAvaliableCopies(Integer.parseInt(novoValor));
+                        break;
+                    case 11:
+                        item.setDetalhes(novoValor);
+                        break;
+                }
+            }
+        }
     }
 
-    private static void removerItem(Scanner scanner) {
-        // Lógica para remover um item
-        System.out.println("Operação de Remoção de Item");
+    private static void removerItem(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite o codigo do item que deseja remover:");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+
+        for(Item item : biblioteca.getItems()){
+            if(item.getCodigo() == codigo){
+                biblioteca.getItems().remove(item);
+                System.out.println("Livro " + item.getTitle() + " removido");
+                return;
+            }
+        }
+
     }
 
-    private static void adicionarMembro(Scanner scanner) {
-        // Lógica para adicionar um novo membro
-        System.out.println("Operação de Adição de Membro");
+    private static void adicionarMembro(Scanner scanner, Library biblioteca) {
+        System.out.println("---- Qual tipo de membro deseja adicionar? ----");
+            System.out.println();
+            System.out.println("1. Aluno de graduação");
+            System.out.println("2. Aluno de pos graduação");
+            System.out.println("3. Funcionário");
+            System.out.println("4. Professor");
+            System.out.println("5. Voltar");
+            System.out.println();
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+
+        if(opcao == 5) return;
+
+        System.out.println("Nome:");
+        String nome = scanner.nextLine();
+
+        System.out.println("Numero de identificação da faculdade:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Endereço:");
+        String endereco = scanner.nextLine();
+
+        System.out.println("Contato:");
+        String contato = scanner.nextLine();
+
+        switch(opcao){
+            case 1:
+                System.out.println("Curso:");
+                String cursoGraduacao = scanner.nextLine();
+                Undergraduate graduando = new Undergraduate(nome, id, endereco, contato, cursoGraduacao);
+                biblioteca.addPerson(graduando);
+                break;
+            case 2:
+                System.out.println("Curso:");
+                String cursoPos = scanner.nextLine();
+                Postgraduate posGraduando = new Postgraduate(nome, id, endereco, contato, cursoPos);
+                biblioteca.addPerson(posGraduando);
+                break;
+            case 3:
+                System.out.println("---- Selecione o cargo do funcionário ----");
+                    System.out.println();
+                    System.out.println("1. Administrador");
+                    System.out.println("2. Atendente");
+                    System.out.println("3. Gerente");
+                    System.out.println("4. Voltar");
+                    System.out.println();
+                    System.out.println();
+                    System.out.print("Escolha uma opção: ");
+                int cargo = scanner.nextInt();
+                scanner.nextLine();
+                AuthorizationLevel nivel = AuthorizationLevel.ATTENDANT;
+                switch(cargo){
+                    case 1:
+                        nivel = AuthorizationLevel.ADMINISTRATOR;
+                        break;
+                    case 2:
+                        nivel = AuthorizationLevel.ATTENDANT;
+                        break;
+                    case 3:
+                        nivel = AuthorizationLevel.MANAGER;
+                        break;
+                    default:
+                        System.out.println("Opção não corresponde");
+                        System.out.println();
+                }
+                Employee funcionario = new Employee(nome, id, endereco, contato, nivel);
+                biblioteca.addPerson(funcionario);
+                break;
+            case 4:
+                System.out.println("Área de atuação:");
+                String area = scanner.nextLine();
+                Teacher professor = new Teacher(nome, id, endereco, contato, area);
+                biblioteca.addPerson(professor);
+                break;
+        }
     }
 
     private static void editarMembro(Scanner scanner) {

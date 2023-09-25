@@ -14,13 +14,12 @@ public abstract class People {
     protected int borrowedNumber;
 
     //Constructor
-    public People(String name, int universityIdentificationNumber, String address, String contact,
-            LocalDate registrationDate) {
+    public People(String name, int universityIdentificationNumber, String address, String contact) {
         this.name = name;
         this.universityIdentificationNumber = universityIdentificationNumber;
         this.address = address;
         this.contact = contact;
-        this.registrationDate = registrationDate;
+        this.registrationDate = LocalDate.now();
         this.borrowedNumber = 0;
     }
 

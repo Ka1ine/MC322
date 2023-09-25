@@ -6,8 +6,8 @@ public class Postgraduate extends People {
 
     // Constructor
     public Postgraduate(String name, int universityIdentificationNumber, String address, String contact,
-            LocalDate registrationDate, String postGraduationCourse) {
-        super(name, universityIdentificationNumber, address, contact, registrationDate);
+            String postGraduationCourse) {
+        super(name, universityIdentificationNumber, address, contact);
         this.postGraduationCourse = postGraduationCourse;
         this.borrowLimit = 5;
         this.returnPeriod = 20;
