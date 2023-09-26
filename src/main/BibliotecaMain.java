@@ -33,6 +33,7 @@ public class BibliotecaMain {
         MembroView membroView = new MembroViewImpl(membroController);
         // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
         Library biblioteca = new Library();
+        
 
         Scanner scanner = new Scanner(System.in);
         
