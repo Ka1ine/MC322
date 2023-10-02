@@ -8,7 +8,7 @@ public class Undergraduate extends People {
             String graduationCourse) {
         super(name, universityIdentificationNumber, address, contact);
         this.graduationCourse = graduationCourse;
-        this.borrowLimit = 0;
+        this.borrowLimit = 3;
         this.returnPeriod = 15;
         this.feeValue = 1;
     }

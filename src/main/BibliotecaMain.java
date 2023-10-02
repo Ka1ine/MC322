@@ -35,45 +35,7 @@ public class BibliotecaMain {
         // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
         Library biblioteca = new Library();
         
-
         Scanner scanner = new Scanner(System.in);
-        Book livro = new Book(
-            "O Grande Gatsby", 
-            "F. Scott Fitzgerald", 
-            123, 
-            "Scribner", 
-            1925, 
-            "Ficção",
-            "Um romance sobre o Sonho Americano", 
-            "Inglês", 
-            "Capa dura", 
-            "978-3-16-148410-0", 
-            "Primeira Edição",
-            "Sla",
-            2, 
-            1, 
-            "Estante da Biblioteca 3A", 
-            "Bom estado"
-        );
-
-        biblioteca.addItem(livro);
-        Undergraduate aluno = new Undergraduate(
-            "Rogério", 
-            250267, 
-            "Rua", 
-            "15", 
-            "Midialogia"
-        );
-        biblioteca.addPerson(aluno);
-
-        Employee funcionario = new Employee("Nome do Funcionário",
-            12345,
-            "Endereço do Funcionário",
-            "Contato do Funcionário",
-            AuthorizationLevel.ADMINISTRATOR);
-        biblioteca.addPerson(funcionario);
-
-        
         
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
