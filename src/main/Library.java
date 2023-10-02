@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import biblioteca.models.Borrow;
+import biblioteca.models.Membro;
 import biblioteca.models.Itens.Book;
 import biblioteca.models.Itens.CD;
 import biblioteca.models.Itens.DVD;
@@ -68,6 +69,12 @@ public class Library {
         System.out.println("Lista de Livros:");
         for (Item item : items) {
             System.out.println("Nome: " + item.getTitle());
+        }
+    }
+       public void printItemsPeople(List<People> peoples) {
+        System.out.println("Lista de Membros:");
+        for (People people : peoples) {
+            System.out.println("Nome: " + people.getName());
         }
     }
 
