@@ -11,7 +11,7 @@ import biblioteca.models.Membros.People;
 public class Borrow {
     private People person;
     private Item item;
-    private Employee employee;
+    private People employee;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private LocalDate shouldReturn;
@@ -19,30 +19,56 @@ public class Borrow {
     private boolean renewed;
     private double fee; 
 
-    // Constructor
-    public Borrow(People person, Item item, Employee employee, LocalDate dataEmprestimo) {
-        if (AccessControl.canBorrowItem(employee)) {
-            if(person.getBorrowedNumber() < person.getBorrowLimit()){
-                if(item.getAvaliableCopies() > 0){
-                    this.person = person;
-                    this.item = item;
-                    this.employee = employee;
-                    this.dataEmprestimo = dataEmprestimo;
-                    this.dataDevolucao = null;
-                    this.shouldReturn = dataEmprestimo.plusDays(person.getReturnPeriod());
-                    this.status = "Regular";
-                    this.renewed = false;
-                    this.fee = 0;
-                }else{
-                    System.out.println("Impossible to borrow this item, it is not avaliable");
-                }
-            }else{
-                System.out.println("Impossible to borrow this item, person achieved the borrow limit");
-            }
-        } else {
-            System.out.println("Permission denied. The employee cannot borrow items.");
+    // Exceção para quando o limite de empréstimos de uma pessoa é excedido
+    public class ExcecaoLimiteEmprestimoExcedido extends Exception {
+        public ExcecaoLimiteEmprestimoExcedido(String message) {
+            super(message);
         }
     }
+
+    // Exceção para quando o item não está disponível para empréstimo
+    public class ExcecaoItemNaoDisponivel extends Exception {
+        public ExcecaoItemNaoDisponivel(String message) {
+            super(message);
+        }
+    }
+
+    // Exceção para quando o funcionário não tem permissão para fazer empréstimos
+    public class ExcecaoPermissaoNegada extends Exception {
+        public ExcecaoPermissaoNegada(String message) {
+            super(message);
+        }
+    }
+
+    // Constructor
+    public Borrow(People person, Item item, People employee) {
+        try {
+            if (AccessControl.canBorrowItem(employee)) {
+                if (person.getBorrowedNumber() < person.getBorrowLimit()) {
+                    if (item.getAvaliableCopies() > 0) {
+                        this.person = person;
+                        this.item = item;
+                        this.employee = employee;
+                        this.dataEmprestimo = LocalDate.now();
+                        this.dataDevolucao = null;
+                        this.shouldReturn = dataEmprestimo.plusDays(person.getReturnPeriod());
+                        this.status = "Regular";
+                        this.renewed = false;
+                        this.fee = 0;
+                        item.setAvaliableCopies(item.getAvaliableCopies() - 1);
+                    } else {
+                        throw new ExcecaoItemNaoDisponivel("Impossível de emprestar esse item, ele não está disponível");
+                    }
+                } else {
+                    throw new ExcecaoLimiteEmprestimoExcedido("Impossível de emprestar esse item, essa pessoa atingiu seu limite de empréstimos");
+                }
+            } else {
+                throw new ExcecaoPermissaoNegada("Permissão negada. O funcionário não pode fazer empréstimos.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }    
 
     //methods
     public double calcularMulta(){
@@ -77,6 +103,7 @@ public class Borrow {
         this.dataDevolucao = date;
         this.status = "Returned";
         person.setTotalFee(person.getTotalFee() + calcularMulta());
+        item.setAvaliableCopies(item.getAvaliableCopies() + 1);
     }
 
     public void renew(){
@@ -103,7 +130,7 @@ public class Borrow {
         this.item = item;
     }
 
-    public Employee getEmployee() {
+    public People getEmployee() {
         return employee;
     }
 
@@ -141,9 +168,12 @@ public class Borrow {
     }
     
     public static class AccessControl {
-        public static boolean canBorrowItem(Employee employee) {
-            return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
-                employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+        public static boolean canBorrowItem(People person) {
+            if(person instanceof Employee){
+                Employee employee = (Employee) person;
+                return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
+                    employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+            }else return false;
         }
     }
 

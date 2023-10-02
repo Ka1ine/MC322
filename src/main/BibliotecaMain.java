@@ -50,8 +50,8 @@ public class BibliotecaMain {
             "978-3-16-148410-0", 
             "Primeira Edição",
             "Sla",
-            100, 
-            50, 
+            2, 
+            1, 
             "Estante da Biblioteca 3A", 
             "Bom estado"
         );
@@ -65,6 +65,15 @@ public class BibliotecaMain {
             "Midialogia"
         );
         biblioteca.addPerson(aluno);
+
+        Employee funcionario = new Employee("Nome do Funcionário",
+            12345,
+            "Endereço do Funcionário",
+            "Contato do Funcionário",
+            AuthorizationLevel.ADMINISTRATOR);
+        biblioteca.addPerson(funcionario);
+
+        
         
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
@@ -141,7 +150,7 @@ public class BibliotecaMain {
                     removerItem(scanner, biblioteca);
                     break;
                 case 5:
-                    realizarEmprestimo(scanner);
+                    realizarEmprestimo(scanner, biblioteca);
                     break;
                 case 6:
                     realizarRenovacao(scanner);
@@ -288,9 +297,43 @@ public class BibliotecaMain {
     }
 
     // Métodos para realizar empréstimo, renovação e reserva
-    private static void realizarEmprestimo(Scanner scanner) {
-        // Lógica para realizar um empréstimo
-        System.out.println("Operação de Empréstimo de Itens");
+    private static void realizarEmprestimo(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação da pessoa que está emprestando:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a identificação do funcionário que está emprestando:");
+        int codigoFuncionario = scanner.nextInt();
+        scanner.nextLine();
+        People pessoa = null;
+        Item objeto = null;
+        People funcionario = null;
+        for(People p : biblioteca.getPersons()){
+            if(p.getUniversityIdentificationNumber() == id){
+                pessoa = p;
+                break;
+            }
+        }
+        for(Item i : biblioteca.getItems()){
+            if(i.getCodigo() == codigoItem){
+                objeto = i;
+                break;
+            }
+        }
+        for(People f : biblioteca.getPersons()){
+            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+                funcionario = f;
+                break;
+            }
+        }
+        Borrow emprestimo = new Borrow(pessoa, objeto, funcionario);
+        try{
+            biblioteca.addBorrow(emprestimo);
+        }catch (Exception e) {
+            System.out.println("Erro ao adicionar o empréstimo");
+        }
     }
 
     private static void realizarRenovacao(Scanner scanner) {
