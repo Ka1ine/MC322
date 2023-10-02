@@ -4,6 +4,7 @@ import java.util.List;
 
 import biblioteca.controllers.MembroController;
 import biblioteca.models.Membro;
+import biblioteca.models.Itens.Item;
 
 public class MembroViewImpl implements MembroView {
     private MembroController membroController;
@@ -14,7 +15,10 @@ public class MembroViewImpl implements MembroView {
 
     @Override
     public void mostrarListaMembros(List<Membro> membros) {
-        // Implementação da exibição da lista de membros
+        System.out.println("Lista de Membros:");
+        for (Membro membro : membros) {
+            System.out.println("Nome: ");
+        }
     }
 
     @Override

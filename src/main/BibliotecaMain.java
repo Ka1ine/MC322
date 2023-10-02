@@ -10,6 +10,7 @@ import biblioteca.models.Itens.Item;
 import biblioteca.models.Itens.OtherMedia;
 import biblioteca.models.Membros.AuthorizationLevel;
 import biblioteca.models.Membros.Employee;
+import biblioteca.models.Membros.People;
 import biblioteca.models.Membros.Postgraduate;
 import biblioteca.models.Membros.Teacher;
 import biblioteca.models.Membros.Undergraduate;
@@ -36,6 +37,34 @@ public class BibliotecaMain {
         
 
         Scanner scanner = new Scanner(System.in);
+        Book livro = new Book(
+            "O Grande Gatsby", 
+            "F. Scott Fitzgerald", 
+            123, 
+            "Scribner", 
+            1925, 
+            "Ficção",
+            "Um romance sobre o Sonho Americano", 
+            "Inglês", 
+            "Capa dura", 
+            "978-3-16-148410-0", 
+            "Primeira Edição",
+            "Sla",
+            100, 
+            50, 
+            "Estante da Biblioteca 3A", 
+            "Bom estado"
+        );
+
+        biblioteca.addItem(livro);
+        Undergraduate aluno = new Undergraduate(
+            "Rogério", 
+            250267, 
+            "Rua", 
+            "15", 
+            "Midialogia"
+        );
+        biblioteca.addPerson(aluno);
         
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
@@ -146,17 +175,16 @@ public class BibliotecaMain {
 
             switch (opcaoMembros) {
                 case 1:
-                    List<Membro> membros = membroController.listarMembros();
-                    membroView.mostrarListaMembros(membros);
+                    biblioteca.printItemsPeople(biblioteca.getPersons());
                     break;
                 case 2:
                     adicionarMembro(scanner, biblioteca);
                     break;
                 case 3:
-                    editarMembro(scanner);
+                    editarMembro(scanner, biblioteca);
                     break;
                 case 4:
-                    removerMembro(scanner);
+                    removerMembro(scanner, biblioteca);
                     break;
                 case 5:
                     return;
@@ -574,14 +602,54 @@ public class BibliotecaMain {
         }
     }
 
-    private static void editarMembro(Scanner scanner) {
-        // Lógica para editar um membro existente
+    private static void editarMembro(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação do membro que deseja editar:");
+        int identificacao = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Operação de Edição de Membro");
+            System.out.println("---- O que deseja editar nesse item? ----");
+        System.out.println();
+        System.out.println("1. Nome");
+        System.out.println("2. Endereço");
+        System.out.println("3. Contato");
+        System.out.println("4. Voltar");
+        System.out.println();
+        System.out.println();
+        System.out.print("Escolha uma opção: ");
+        int atributo = scanner.nextInt();
+        scanner.nextLine();
+        if(atributo == 4) return;
+        System.out.println("`Digite o novo valor desse atributo:");
+        String novoValor = scanner.nextLine();
+        for(People pessoa : biblioteca.getPersons()){
+            if(pessoa.getUniversityIdentificationNumber() == identificacao){
+                switch(atributo){
+                    case 1:
+                        pessoa.setName(novoValor);
+                        break;
+                    case 2:
+                        pessoa.setAddress(novoValor);;
+                        break;
+                    case 3:
+                        pessoa.setContact(novoValor);
+                        break;
+                }
+            }
+        }
     }
 
-    private static void removerMembro(Scanner scanner) {
-        // Lógica para remover um membro
-        System.out.println("Operação de Remoção de Membro");
+    private static void removerMembro(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação do membro que deseja remover:");
+        int identificacao = scanner.nextInt();
+        scanner.nextLine();
+
+        for(People pessoa : biblioteca.getPersons()){
+            if(pessoa.getUniversityIdentificationNumber() == identificacao){
+                biblioteca.getPersons().remove(pessoa);
+                System.out.println(pessoa.getName() + " removido");
+                return;
+            }
+        }
     }
 
     // Métodos para gerar relatórios e estatísticas

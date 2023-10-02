@@ -1,5 +1,9 @@
 package biblioteca.models.Itens;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import biblioteca.models.Membros.People;
 
 public abstract class Item {
@@ -31,8 +35,8 @@ public abstract class Item {
         this.cover = cover;
         this.reserved = null;
         this.detalhes = detalhes;
-    }
-
+        }
+    
     public String getTitle() {
         return title;
     }
