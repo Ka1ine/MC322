@@ -36,20 +36,7 @@ public class BibliotecaMain {
         Library biblioteca = new Library();
         
         Scanner scanner = new Scanner(System.in);
-
-        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
-        Employee adminEmployee = new Employee("Nome do Funcionário", 12345, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
-        biblioteca.addPerson(adminEmployee);
         
-        Employee adminEmployee2 = new Employee("Nome do", 123456, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
-        biblioteca.addPerson(adminEmployee2);
-        
-        Undergraduate cleber = new Undergraduate("Cleber", 250267, "Endereço do Cleber", "Contato do Cleber", "Curso de Graduação do Cleber");
-        biblioteca.addPerson(cleber);
-
-        DVD dvd = new DVD("Título do DVD", "Autor do DVD", 123, "Editora do DVD", 2023, "Gênero do DVD", "Sinopse do DVD", "Idioma do DVD", "Capa do DVD", "Detalhes do DVD", "Elenco do DVD", 120, "Áudio do DVD", "Legendas do DVD", "Diretor do DVD", 2022, "Conservação do DVD", 10, 5);
-        biblioteca.addItem(dvd);
-
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
@@ -131,7 +118,7 @@ public class BibliotecaMain {
                     realizarRenovacao(scanner, biblioteca);
                     break;
                 case 7:
-                    fazerReserva(scanner);
+                    fazerReserva(scanner, biblioteca);
                     break;
                 case 8:
                     return;
@@ -332,9 +319,38 @@ public class BibliotecaMain {
         }
     }
 
-    private static void fazerReserva(Scanner scanner) {
-        // Lógica para fazer uma reserva de item
-        System.out.println("Operação de Reserva de Itens");
+    private static void fazerReserva(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação da pessoa que está reservando o item:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item a ser reservado:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a identificação do funcionário que está reservando:");
+        int codigoFuncionario = scanner.nextInt();
+        scanner.nextLine();
+        People pessoa = null;
+        Item objeto = null;
+        People funcionario = null;
+        for(People p : biblioteca.getPersons()){
+            if(p.getUniversityIdentificationNumber() == id){
+                pessoa = p;
+                break;
+            }
+        }
+        for(Item i : biblioteca.getItems()){
+            if(i.getCodigo() == codigoItem){
+                objeto = i;
+                break;
+            }
+        }
+        for(People f : biblioteca.getPersons()){
+            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+                funcionario = f;
+                break;
+            }
+        }
+        objeto.addToReservedList(pessoa, funcionario);
     }
 
     // Métodos para adicionar, editar e remover itens e membros

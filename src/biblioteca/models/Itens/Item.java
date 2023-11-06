@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import biblioteca.models.Membros.AuthorizationLevel;
+import biblioteca.models.Membros.Employee;
 import biblioteca.models.Membros.People;
 
 public abstract class Item {
@@ -16,14 +18,16 @@ public abstract class Item {
     private String synopsis;
     private String language;
     private String cover;
+    private String detalhes;
     protected int numberCopies;
     protected int avaliableCopies;
-    private People reserved;
-    private String detalhes;
+    private int numberReserved;
+    private List<People> reservedList;
 
     //Constructor
     public Item(String title, String author, int codigo, String publisher, int publishmentYear, String genre, 
                 String synopsis, String language, String cover, String detalhes) {
+        this.reservedList = new ArrayList<>();
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -33,10 +37,11 @@ public abstract class Item {
         this.synopsis = synopsis;
         this.language = language;
         this.cover = cover;
-        this.reserved = null;
+        this.numberReserved = 0;
         this.detalhes = detalhes;
-        }
+    }
     
+    //Getters e Setters
     public String getTitle() {
         return title;
     }
@@ -125,19 +130,62 @@ public abstract class Item {
         this.avaliableCopies = avaliableCopies;
     }
 
-    public People getReserved() {
-        return reserved;
-    }
-
-    public void setReserved(People reserved) {
-        this.reserved = reserved;
-    }
-
     public String getDetalhes() {
         return detalhes;
     }
 
     public void setDetalhes(String detalhes) {
         this.detalhes = detalhes;
+    }
+
+    public int getNumberReserved() {
+        return numberReserved;
+    }
+
+    public void setNumberReserved(int numberReserved) {
+        this.numberReserved = numberReserved;
+    }
+
+    public List<People> getReservedList() {
+        return reservedList;
+    }
+
+    public void setReservedList(List<People> reservedList) {
+        this.reservedList = reservedList;
+    }
+
+    //Methods
+    public void addToReservedList(People person, People employee){
+        if(AccessControl.canReserveItem(employee)){
+            this.reservedList.add(person);
+            this.numberReserved += 1;
+            System.out.println("Item reservado com sucesso!");
+        }else{
+            System.out.println("Reserva falhou! Acesso negado.");
+        }
+    }
+
+    public void removeReservedList(People person, People employee){
+        if(this.numberReserved > 0){
+            if(AccessControl.canReserveItem(employee)){
+                this.reservedList.remove(person);
+                this.numberReserved -= 1;
+                System.out.println(person.getName() + "Removido da lista de reserva.");
+            }else{
+                System.out.println("Operação falhou! Acesso negado.");
+            }
+        }else{
+            System.out.println("Não há nenhuma reserva desse item.");
+        }
+    }
+
+    public static class AccessControl {
+        public static boolean canReserveItem(People person) {
+            if(person instanceof Employee){
+                Employee employee = (Employee) person;
+                return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
+                    employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+            }else return false;
+        }
     }
 }

@@ -51,8 +51,8 @@ public class ItemMultimidiaImpl implements ItemMultimidia{
     }
 
     @Override
-    public People getReserva(Item objeto) {
-        return objeto.getReserved();
+    public int getNumeroReservas(Item objeto) {
+        return objeto.getNumberReserved();
     }
 
     @Override
@@ -64,5 +64,10 @@ public class ItemMultimidiaImpl implements ItemMultimidia{
     public String getTitulo(Item objeto) {
         return objeto.getTitle();
     }
+
+	@Override
+	public int getCodigo(Item objeto) {
+        return objeto.getCodigo();
+	}
 
 }
