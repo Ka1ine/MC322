@@ -72,7 +72,7 @@ public class Library {
             System.out.println("Nome: " + item.getTitle());
         }
     }
-       public void printItemsPeople(List<People> peoples) {
+    public void printItemsPeople(List<People> peoples) {
         System.out.println("Lista de Membros:");
         for (People people : peoples) {
             System.out.println("Nome: " + people.getName());

@@ -36,7 +36,20 @@ public class BibliotecaMain {
         Library biblioteca = new Library();
         
         Scanner scanner = new Scanner(System.in);
+
+        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
+        Employee adminEmployee = new Employee("Nome do Funcionário", 12345, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee);
         
+        Employee adminEmployee2 = new Employee("Nome do", 123456, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee2);
+        
+        Undergraduate cleber = new Undergraduate("Cleber", 250267, "Endereço do Cleber", "Contato do Cleber", "Curso de Graduação do Cleber");
+        biblioteca.addPerson(cleber);
+
+        DVD dvd = new DVD("Título do DVD", "Autor do DVD", 123, "Editora do DVD", 2023, "Gênero do DVD", "Sinopse do DVD", "Idioma do DVD", "Capa do DVD", "Detalhes do DVD", "Elenco do DVD", 120, "Áudio do DVD", "Legendas do DVD", "Diretor do DVD", 2022, "Conservação do DVD", 10, 5);
+        biblioteca.addItem(dvd);
+
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
@@ -115,7 +128,7 @@ public class BibliotecaMain {
                     realizarEmprestimo(scanner, biblioteca);
                     break;
                 case 6:
-                    realizarRenovacao(scanner);
+                    realizarRenovacao(scanner, biblioteca);
                     break;
                 case 7:
                     fazerReserva(scanner);
@@ -298,9 +311,25 @@ public class BibliotecaMain {
         }
     }
 
-    private static void realizarRenovacao(Scanner scanner) {
-        // Lógica para realizar uma renovação de empréstimo
-        System.out.println("Operação de Renovação de Empréstimos");
+    private static void realizarRenovacao(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação da pessoal que realizou o emprestimo:");
+        int idPessoa = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        Borrow emprestimo = null;
+        for(Borrow b : biblioteca.getBorrows()){
+            if(b.getPerson().getUniversityIdentificationNumber() == idPessoa && b.getItem().getCodigo() == codigoItem){
+                emprestimo = b;
+                break;
+            }
+        }
+        if(emprestimo != null){
+            emprestimo.renew();
+        }else{
+            System.out.println("Erro! Emprestimo não encontrado.");
+        }
     }
 
     private static void fazerReserva(Scanner scanner) {
