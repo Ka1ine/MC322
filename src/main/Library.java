@@ -12,6 +12,7 @@ import biblioteca.models.Itens.DVD;
 import biblioteca.models.Itens.Ebook;
 import biblioteca.models.Itens.Item;
 import biblioteca.models.Itens.OtherMedia;
+import biblioteca.models.Membros.AuthorizationLevel;
 import biblioteca.models.Membros.Employee;
 import biblioteca.models.Membros.People;
 import biblioteca.models.Membros.Postgraduate;
@@ -34,6 +35,17 @@ public class Library {
     public List<People> getPersons() {
         return people;
     }
+
+    public People getPersonById(int acessoAdministrador){
+        People pessoa = null;
+        for(People i : people){
+            if (i.getUniversityIdentificationNumber() == acessoAdministrador) {
+                pessoa = i;
+            }
+        }
+        return pessoa;
+    }
+
     public void setPersons(List<People> people) {
         this.people = people;
     }
