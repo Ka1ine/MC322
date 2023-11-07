@@ -99,12 +99,14 @@ public class Borrow {
         return status; 
     }
     
-    public void returnItem(LocalDate date){
+    public double returnItem(LocalDate date){
         getStatus();
+        System.out.println("Status do emprestimo: " + getStatus());
         this.dataDevolucao = date;
         this.status = "Returned";
         person.setTotalFee(person.getTotalFee() + calcularMulta());
         item.setAvaliableCopies(item.getAvaliableCopies() + 1);
+        return person.getTotalFee();
     }
 
     public void renew(){

@@ -71,7 +71,7 @@ public class Library {
 
     public void addBorrow(Borrow borrow) {
         borrows.add(borrow);
-        System.out.println(borrow.getPerson().getName() + " pegou o livro " + borrow.getItem().getTitle());
+        System.out.println(borrow.getPerson().getName() + " pegou o item " + borrow.getItem().getTitle());
     }
 
     //methods

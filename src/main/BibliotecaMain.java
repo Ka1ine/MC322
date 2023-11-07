@@ -17,7 +17,6 @@ import biblioteca.models.Membros.Undergraduate;
 import biblioteca.views.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaMain {
@@ -36,7 +35,23 @@ public class BibliotecaMain {
         Library biblioteca = new Library();
         
         Scanner scanner = new Scanner(System.in);
+
+        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
+        Employee adminEmployee = new Employee("Nome do Funcionário", 12345, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee);
         
+        Employee adminEmployee2 = new Employee("Nome do", 123456, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee2);
+        
+        Undergraduate cleber = new Undergraduate("Cleber", 250267, "Endereço do Cleber", "Contato do Cleber", "Curso de Graduação do Cleber");
+        biblioteca.addPerson(cleber);
+
+        DVD dvd = new DVD("Título do DVD", "Autor do DVD", 123, "Editora do DVD", 2023, "Gênero do DVD", "Sinopse do DVD", "Idioma do DVD", "Capa do DVD", "Detalhes do DVD", "Elenco do DVD", 120, "Áudio do DVD", "Legendas do DVD", "Diretor do DVD", 2022, "Conservação do DVD", 10, 5);
+        biblioteca.addItem(dvd);
+
+        Borrow emprestimo = new Borrow(cleber, dvd, adminEmployee2);
+        biblioteca.addBorrow(emprestimo);
+
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
@@ -90,7 +105,8 @@ public class BibliotecaMain {
             System.out.println("5. Empréstimo de Itens");
             System.out.println("6. Renovação de Empréstimos");
             System.out.println("7. Reservas de Itens");
-            System.out.println("8. Voltar");
+            System.out.println("8. Devolver Item");
+            System.out.println("9. Voltar");
             System.out.println();
             System.out.println();
             System.out.print("Escolha uma opção: ");
@@ -121,6 +137,8 @@ public class BibliotecaMain {
                     fazerReserva(scanner, biblioteca);
                     break;
                 case 8:
+                    devolverItem(scanner, biblioteca);
+                case 9:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -351,6 +369,26 @@ public class BibliotecaMain {
             }
         }
         objeto.addToReservedList(pessoa, funcionario);
+    }
+
+    private static void devolverItem(Scanner scanner, Library biblioteca){
+        System.out.println("Digite a identificação da pessoa que está devolvendo o item:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item a ser devolvido:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a identificação do funcionário que está devolvendo:");
+        int codigoFuncionario = scanner.nextInt();
+        scanner.nextLine();
+        Borrow emprestimo = null;
+        for(Borrow b : biblioteca.getBorrows()){
+            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityIdentificationNumber() == id && b.getEmployee().getUniversityIdentificationNumber() == codigoFuncionario){
+                emprestimo = b;
+                break;
+            }
+        }
+        emprestimo.returnItem(LocalDate.now());
     }
 
     // Métodos para adicionar, editar e remover itens e membros
