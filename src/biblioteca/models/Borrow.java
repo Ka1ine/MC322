@@ -56,6 +56,7 @@ public class Borrow {
                         this.renewed = false;
                         this.fee = 0;
                         item.setAvaliableCopies(item.getAvaliableCopies() - 1);
+                        person.setBorrowedNumber(person.getBorrowedNumber() + 1);
                     } else {
                         throw new ExcecaoItemNaoDisponivel("Impossível de emprestar esse item, ele não está disponível");
                     }
@@ -98,18 +99,23 @@ public class Borrow {
         return status; 
     }
     
-    public void returnItem(LocalDate date){
+    public double returnItem(LocalDate date){
         getStatus();
+        System.out.println("Status do emprestimo: " + getStatus());
         this.dataDevolucao = date;
         this.status = "Returned";
         person.setTotalFee(person.getTotalFee() + calcularMulta());
         item.setAvaliableCopies(item.getAvaliableCopies() + 1);
+        return person.getTotalFee();
     }
 
     public void renew(){
         if(!this.renewed){
             this.shouldReturn = this.shouldReturn.plusDays(person.getReturnPeriod());
             this.renewed = true;
+            System.out.println("Empréstimo renovado!");
+        }else{
+            System.out.println("Renovação falhou! Empréstimo já foi renovado.");
         }
     }
 
