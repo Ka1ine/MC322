@@ -46,6 +46,9 @@ public class Borrow {
             if (AccessControl.canBorrowItem(employee)) {
                 if (person.getBorrowedNumber() < person.getBorrowLimit()) {
                     if (item.getAvaliableCopies() > 0) {
+                        if(item.getReservedList().contains(person)){
+                            item.removeReservedList(person, employee);
+                        }
                         this.person = person;
                         this.item = item;
                         this.employee = employee;
