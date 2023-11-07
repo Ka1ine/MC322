@@ -53,6 +53,15 @@ public class Library {
     public List<Item> getItems() {
         return items;
     }
+    public Item getItemByCodigo(int codigo){
+        Item obj = null; 
+        for(Item i : items){
+            if(i.getCodigo() == codigo){
+                obj = i;
+            }
+        }
+        return obj;
+    }
     public void setItems(List<Item> items) {
         this.items = items;
     }
@@ -74,7 +83,7 @@ public class Library {
 
     public void addBorrow(Borrow borrow) {
         borrows.add(borrow);
-        System.out.println(borrow.getPerson().getName() + " pegou o livro " + borrow.getItem().getTitle());
+        System.out.println(borrow.getPerson().getName() + " pegou o item " + borrow.getItem().getTitle());
     }
 
     //methods
@@ -84,7 +93,7 @@ public class Library {
             System.out.println("Nome: " + item.getTitle());
         }
     }
-       public void printItemsPeople(List<People> peoples) {
+    public void printItemsPeople(List<People> peoples) {
         System.out.println("Lista de Membros:");
         for (People people : peoples) {
             System.out.println("Nome: " + people.getName());
@@ -140,29 +149,19 @@ public class Library {
         for (Borrow borrow : borrows) {
             if(borrow.getItem() instanceof Book){
                 borrowedBook++;
-                if(borrow.getItem().getReserved() != null){
-                    reservedBook++;
-                }
+                reservedBook += borrow.getItem().getNumberReserved();
             }else if(borrow.getItem() instanceof Ebook){
                 borrowedEbook++;
-                if(borrow.getItem().getReserved() != null){
-                    reservedEbook++;
-                }
+                reservedEbook += borrow.getItem().getNumberReserved();
             }else if(borrow.getItem() instanceof CD){
                 borrowedCD++;
-                if(borrow.getItem().getReserved() != null){
-                    reservedCD++;
-                }
+                reservedCD += borrow.getItem().getNumberReserved();
             }else if(borrow.getItem() instanceof DVD){
                 borrowedDVD++;
-                if(borrow.getItem().getReserved() != null){
-                    reservedDVD++;
-                }
+                reservedDVD += borrow.getItem().getNumberReserved();
             }else if(borrow.getItem() instanceof OtherMedia){
                 borrowedOtherMedia++;
-                if(borrow.getItem().getReserved() != null){
-                    reservedOtherMedia++;
-                }
+                reservedOtherMedia += borrow.getItem().getNumberReserved();
             }
         }
         System.out.println("------------------------------------");

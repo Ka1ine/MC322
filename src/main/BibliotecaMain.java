@@ -19,7 +19,6 @@ import biblioteca.models.Membros.CReflection.Classes;
 import biblioteca.views.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaMain {
@@ -38,11 +37,7 @@ public class BibliotecaMain {
         Library biblioteca = new Library();
         
         Scanner scanner = new Scanner(System.in);
-        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
-        Employee adminEmployee2 = new Employee("Nome do", 123, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
-        biblioteca.addPerson(adminEmployee2);
 
-        
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
@@ -95,7 +90,8 @@ public class BibliotecaMain {
             System.out.println("5. Empréstimo de Itens");
             System.out.println("6. Renovação de Empréstimos");
             System.out.println("7. Reservas de Itens");
-            System.out.println("8. Voltar");
+            System.out.println("8. Devolver Item");
+            System.out.println("9. Voltar");
             System.out.println();
             System.out.println();
             System.out.print("Escolha uma opção: ");
@@ -120,12 +116,14 @@ public class BibliotecaMain {
                     realizarEmprestimo(scanner, biblioteca);
                     break;
                 case 6:
-                    realizarRenovacao(scanner);
+                    realizarRenovacao(scanner, biblioteca);
                     break;
                 case 7:
-                    fazerReserva(scanner);
+                    fazerReserva(scanner, biblioteca);
                     break;
                 case 8:
+                    devolverItem(scanner, biblioteca);
+                case 9:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -369,14 +367,79 @@ public class BibliotecaMain {
         }
     }
 
-    private static void realizarRenovacao(Scanner scanner) {
-        // Lógica para realizar uma renovação de empréstimo
-        System.out.println("Operação de Renovação de Empréstimos");
+    private static void realizarRenovacao(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação da pessoal que realizou o emprestimo:");
+        int idPessoa = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        Borrow emprestimo = null;
+        for(Borrow b : biblioteca.getBorrows()){
+            if(b.getPerson().getUniversityIdentificationNumber() == idPessoa && b.getItem().getCodigo() == codigoItem){
+                emprestimo = b;
+                break;
+            }
+        }
+        if(emprestimo != null){
+            emprestimo.renew();
+        }else{
+            System.out.println("Erro! Emprestimo não encontrado.");
+        }
     }
 
-    private static void fazerReserva(Scanner scanner) {
-        // Lógica para fazer uma reserva de item
-        System.out.println("Operação de Reserva de Itens");
+    private static void fazerReserva(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite a identificação da pessoa que está reservando o item:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item a ser reservado:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a identificação do funcionário que está reservando:");
+        int codigoFuncionario = scanner.nextInt();
+        scanner.nextLine();
+        People pessoa = null;
+        Item objeto = null;
+        People funcionario = null;
+        for(People p : biblioteca.getPersons()){
+            if(p.getUniversityIdentificationNumber() == id){
+                pessoa = p;
+                break;
+            }
+        }
+        for(Item i : biblioteca.getItems()){
+            if(i.getCodigo() == codigoItem){
+                objeto = i;
+                break;
+            }
+        }
+        for(People f : biblioteca.getPersons()){
+            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+                funcionario = f;
+                break;
+            }
+        }
+        objeto.addToReservedList(pessoa, funcionario);
+    }
+
+    private static void devolverItem(Scanner scanner, Library biblioteca){
+        System.out.println("Digite a identificação da pessoa que está devolvendo o item:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o codigo do item a ser devolvido:");
+        int codigoItem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a identificação do funcionário que está devolvendo:");
+        int codigoFuncionario = scanner.nextInt();
+        scanner.nextLine();
+        Borrow emprestimo = null;
+        for(Borrow b : biblioteca.getBorrows()){
+            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityIdentificationNumber() == id && b.getEmployee().getUniversityIdentificationNumber() == codigoFuncionario){
+                emprestimo = b;
+                break;
+            }
+        }
+        emprestimo.returnItem(LocalDate.now());
     }
 
     // Métodos para adicionar, editar e remover itens e membros
