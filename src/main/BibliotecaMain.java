@@ -9,11 +9,13 @@ import biblioteca.models.Itens.Ebook;
 import biblioteca.models.Itens.Item;
 import biblioteca.models.Itens.OtherMedia;
 import biblioteca.models.Membros.AuthorizationLevel;
+import biblioteca.models.Membros.CReflection;
 import biblioteca.models.Membros.Employee;
 import biblioteca.models.Membros.People;
 import biblioteca.models.Membros.Postgraduate;
 import biblioteca.models.Membros.Teacher;
 import biblioteca.models.Membros.Undergraduate;
+import biblioteca.models.Membros.CReflection.Classes;
 import biblioteca.views.*;
 
 import java.time.LocalDate;
@@ -36,6 +38,10 @@ public class BibliotecaMain {
         Library biblioteca = new Library();
         
         Scanner scanner = new Scanner(System.in);
+        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
+        Employee adminEmployee2 = new Employee("Nome do", 123, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee2);
+
         
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
@@ -66,8 +72,7 @@ public class BibliotecaMain {
                     // menuRelatoriosEstatisticas(scanner, relatorioView);
                     break;
                 case 4:
-                    // Menu de Administração de Funcionários
-                    menuAdministracaoFuncionarios(scanner);
+                    menuAdministracaoFuncionarios(scanner, biblioteca);
                     break;
                 case 5:
                     System.out.println("Saindo do menu. Até logo!");
@@ -210,7 +215,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuAdministracaoFuncionarios(Scanner scanner) {
+    private static void menuAdministracaoFuncionarios(Scanner scanner, Library biblioteca) {
         while (true) {
             System.out.println("---- Menu Administração de Funcionários ----");
             System.out.println();
@@ -228,7 +233,7 @@ public class BibliotecaMain {
             switch (opcaoFuncionarios) {
                 case 1:
                     // Menu de Administração de Administradores
-                    menuAdministradores(scanner);
+                    menuAdministradores(scanner, biblioteca);
                     break;
                 case 2:
                     // Menu de Administração de Atendentes
@@ -246,8 +251,74 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuAdministradores(Scanner scanner) {
-        // Lógica para administração de administradores
+    private static void menuAdministradores(Scanner scanner, Library biblioteca) {
+        System.out.println("Digite seu acesso de Funcionário:");
+        int acessoAdministrador = scanner.nextInt();
+        scanner.nextLine();
+        try{
+            Employee pessoa = (Employee) biblioteca.getPersonById(acessoAdministrador);
+            if (pessoa.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR) {
+                System.out.println("---- Menu do Administrador ----");
+                System.out.println();
+                System.out.println("1. Pegar Atributo de Professor");
+                System.out.println("2. Pegar Método de Professor");
+                System.out.println("3. Pegar Atributo de Funcionário");
+                System.out.println("4. Pegar Método de Funcionário");
+                System.out.println("5. Pegar Atributo de Pos Graduando");
+                System.out.println("6. Pegar Método de Pos Graduando");
+                System.out.println("7. Pegar Atributo de Aluno de Graduação");
+                System.out.println("8. Pegar Método de Aluno de Graduação");
+                System.out.println("9. Voltar");
+                System.out.println();
+                System.out.println();
+                System.out.print("Escolha uma opção: ");
+                int opcaoAdministrador = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcaoAdministrador) {
+                    case 1:
+                        System.out.println("\nAtributos de Professor:");
+                        CReflection.imprimirAtributos(Classes.TEACHER);
+                        break;
+                    case 2:
+                        System.out.println("\nMétodo de Professor::");
+                        CReflection.imprimirMetodos(Classes.TEACHER);
+                        break;
+                    case 3:
+                        System.out.println("\nAtributos de Funcionário:");
+                        CReflection.imprimirAtributos(Classes.EMPLOYEE);
+                        break;
+                    case 4:
+                        System.out.println("\nMétodo de Funcionário:");
+                        CReflection.imprimirMetodos(Classes.EMPLOYEE);
+                    case 5:
+                        System.out.println("\nAtributos de Pos Graduando:");
+                        CReflection.imprimirAtributos(Classes.POSTGRADUATE);
+                        break;
+                    case 6:
+                        System.out.println("\nMétodo de Pos Graduando:");
+                        CReflection.imprimirMetodos(Classes.POSTGRADUATE);
+                    case 7:
+                        System.out.println("\nAtributos de Graduando:");
+                        CReflection.imprimirAtributos(Classes.UNDERGRADUATE);
+                        break;
+                    case 8:
+                        System.out.println("\nMétodo de Graduando:");
+                        CReflection.imprimirMetodos(Classes.UNDERGRADUATE);
+                    case 9:
+                        return;
+                    default:
+                        System.out.println("Opção inválida. Por favor, escolha novamente.");
+                }
+                    }
+                    else{
+                        System.out.println("Você não tem os acessos necessários");
+                        return;
+                    }
+        } catch (Exception e){
+            System.out.println("Acesso restrito");
+            return;
+        }
     }
 
     private static void menuAtendentes(Scanner scanner) {
