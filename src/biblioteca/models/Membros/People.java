@@ -1,5 +1,7 @@
 package biblioteca.models.Membros;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class People {
     private String name;
@@ -7,6 +9,7 @@ public abstract class People {
     private String address;
     private String contact;
     private LocalDate registrationDate;
+    private List<String> notification;
     protected int borrowLimit;
     protected int returnPeriod;
     protected double feeValue;
@@ -21,6 +24,7 @@ public abstract class People {
         this.contact = contact;
         this.registrationDate = LocalDate.now();
         this.borrowedNumber = 0;
+        this.notification = new ArrayList<>();
     }
 
     //Methods
@@ -28,7 +32,34 @@ public abstract class People {
         setTotalFee(getTotalFee() - paidValue);
     }
 
+    public void addNotification(String message){
+        notification.add(message);
+    }
+
+    public void printNotifications(){
+        int counter = 1;
+        System.out.println("--------  Suas Notificações  --------");
+        for (String elemento : notification) {
+            System.out.println(counter + ": " + elemento);
+            counter =+ 1;
+        }
+        System.out.println("-------------------------------------");
+    }
+
+    public void removeNotification(int index){
+        notification.remove(index - 1);
+        System.out.println("Notificação removida com sucesso.");
+    }
+
     //Getters and Setters
+    public void setNotification(List<String> notification) {
+        this.notification = notification;
+    }
+
+    public List<String> getNotification() {
+        return notification;
+    }
+
     public String getName() {
         return name;
     }
