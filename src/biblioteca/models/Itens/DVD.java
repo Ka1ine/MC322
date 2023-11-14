@@ -1,18 +1,18 @@
 package biblioteca.models.Itens;
 
-public class DVD extends Item{
+public class DVD extends Item implements IItemMultimediaFactory {
     private String cast;
     private int duration;
     private String audio;
     private String subtitles;
     private String director;
     private int releaseYear;
-    private String conservation; 
+    private String conservation;
 
     // Constructor
     public DVD(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
-            String language, String cover, String detalhes, String cast, int duration, String audio, String subtitles,
-            String director, int releaseYear, String conservation, int numberCopies, int avaliableCopies) {
+               String language, String cover, String detalhes, String cast, int duration, String audio, String subtitles,
+               String director, int releaseYear, String conservation, int numberCopies, int avaliableCopies) {
         super(title, author, codigo, publisher, publishmentYear, genre, synopsis, language, cover, detalhes);
         this.cast = cast;
         this.duration = duration;
@@ -49,11 +49,11 @@ public class DVD extends Item{
         this.audio = audio;
     }
 
-    public String getSubtatles() {
+    public String getSubtitles() {
         return subtitles;
     }
 
-    public void setSubtatles(String subtitles) {
+    public void setSubtitles(String subtitles) {
         this.subtitles = subtitles;
     }
 
@@ -81,4 +81,11 @@ public class DVD extends Item{
         this.conservation = conservation;
     }
 
+    @Override
+    public Item createItem() {
+        return new DVD(getTitle(), getAuthor(), getCodigo(), getPublisher(), getPublishmentYear(), getGenre(),
+                getSynopsis(), getLanguage(), getCover(), getDetalhes(), getCast(), getDuration(), getAudio(),
+                getSubtitles(), getDirector(), getReleaseYear(), getConservation(), getNumberCopies(),
+                getAvaliableCopies());
+    }
 }
