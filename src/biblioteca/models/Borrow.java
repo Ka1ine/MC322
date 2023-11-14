@@ -2,6 +2,7 @@ package biblioteca.models;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import biblioteca.models.Itens.Item;
 import biblioteca.models.Membros.AuthorizationLevel;
@@ -101,6 +102,13 @@ public class Borrow {
         }
         return status; 
     }
+
+    public void notificateWaitingList(){
+        List<People> P = item.getReservedList();
+            for (People person : P) {
+                person.addNotification("O item " + item.getTitle() + " está disponível.");
+            }
+    }
     
     public double returnItem(LocalDate date){
         getStatus();
@@ -109,6 +117,7 @@ public class Borrow {
         this.status = "Returned";
         person.setTotalFee(person.getTotalFee() + calcularMulta());
         item.setAvaliableCopies(item.getAvaliableCopies() + 1);
+        notificateWaitingList();
         return person.getTotalFee();
     }
 

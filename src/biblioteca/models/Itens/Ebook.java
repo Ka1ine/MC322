@@ -1,13 +1,14 @@
 package biblioteca.models.Itens;
+
 import java.time.LocalDate;
 
-public class Ebook extends Item {
-    private String format; 
-    private int numberLicences; 
-    private String url; 
-    private String requirements; 
+public class Ebook extends Item implements IItemMultimediaFactory {
+    private String format;
+    private int numberLicences;
+    private String url;
+    private String requirements;
     private LocalDate avaliableDate;
-    private double fileSize; 
+    private double fileSize;
 
     // Constructor
     public Ebook(String title, String author, int codigo, String publisher, int publishmentYear, String genre, String synopsis,
@@ -72,4 +73,11 @@ public class Ebook extends Item {
         this.fileSize = fileSize;
     }
 
+    @Override
+    public Item createItem() {
+        return new Ebook(getTitle(), getAuthor(), getCodigo(), getPublisher(), getPublishmentYear(), getGenre(),
+                getSynopsis(), getLanguage(), getCover(), getDetalhes(), getFormat(), getNumberLicences(),
+                getUrl(), getRequirements(), getAvaliableDate(), getFileSize(), getNumberCopies(),
+                getAvaliableCopies());
+    }
 }
