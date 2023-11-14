@@ -1,5 +1,5 @@
 package main;
-
+import main.Library;
 import biblioteca.controllers.*;
 import biblioteca.models.*;
 import biblioteca.models.Itens.Book;
@@ -34,7 +34,7 @@ public class BibliotecaMain {
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
         // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
-        Library biblioteca = new Library();
+        Library biblioteca = Library.getInstance() ;
         
         Scanner scanner = new Scanner(System.in);
 

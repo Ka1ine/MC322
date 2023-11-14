@@ -5,63 +5,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 import biblioteca.models.Borrow;
-import biblioteca.models.Membro;
 import biblioteca.models.Itens.Book;
 import biblioteca.models.Itens.CD;
 import biblioteca.models.Itens.DVD;
 import biblioteca.models.Itens.Ebook;
 import biblioteca.models.Itens.Item;
 import biblioteca.models.Itens.OtherMedia;
-import biblioteca.models.Membros.AuthorizationLevel;
 import biblioteca.models.Membros.Employee;
 import biblioteca.models.Membros.People;
 import biblioteca.models.Membros.Postgraduate;
 import biblioteca.models.Membros.Teacher;
 import biblioteca.models.Membros.Undergraduate;
 
-
 public class Library {
     private List<People> people;
     private List<Item> items;
     private List<Borrow> borrows;
 
-    public Library() {
+    private static Library instance;
+
+    Library() {
         this.people = new ArrayList<>();
         this.items = new ArrayList<>();
         this.borrows = new ArrayList<>();
     }
 
-    // Getters and Setters
+    public static Library getInstance() {
+        if (instance == null) {
+            instance = new Library();
+        }
+        return instance;
+    }
+
     public List<People> getPersons() {
         return people;
     }
 
-    public People getPersonById(int acessoAdministrador){
-        People pessoa = null;
-        for(People i : people){
-            if (i.getUniversityIdentificationNumber() == acessoAdministrador) {
-                pessoa = i;
+    public People getPersonById(int accessId) {
+        People person = null;
+        for (People p : people) {
+            if (p.getUniversityIdentificationNumber() == accessId) {
+                person = p;
             }
         }
-        return pessoa;
+        return person;
     }
 
     public void setPersons(List<People> people) {
-        this.people = people;
+    this.people = people;
     }
 
     public List<Item> getItems() {
         return items;
     }
-    public Item getItemByCodigo(int codigo){
-        Item obj = null; 
-        for(Item i : items){
-            if(i.getCodigo() == codigo){
-                obj = i;
-            }
-        }
-        return obj;
-    }
+
     public void setItems(List<Item> items) {
         this.items = items;
     }
@@ -69,6 +66,7 @@ public class Library {
     public List<Borrow> getBorrows() {
         return borrows;
     }
+
     public void setBorrows(List<Borrow> borrows) {
         this.borrows = borrows;
     }
@@ -86,13 +84,13 @@ public class Library {
         System.out.println(borrow.getPerson().getName() + " pegou o item " + borrow.getItem().getTitle());
     }
 
-    //methods
     public void printItemsList(List<Item> items) {
         System.out.println("Lista de Livros:");
         for (Item item : items) {
             System.out.println("Nome: " + item.getTitle());
         }
     }
+
     public void printItemsPeople(List<People> peoples) {
         System.out.println("Lista de Membros:");
         for (People people : peoples) {
@@ -134,7 +132,9 @@ public class Library {
         System.out.println("Total de multas aplicadas: " + totalFines);
     }
 
-    public void itemsReport(List<Borrow> borrows){
+
+
+    public void itemsReport(List<Borrow> borrows) {
         int borrowedCD = 0;
         int borrowedDVD = 0;
         int borrowedEbook = 0;
@@ -147,59 +147,60 @@ public class Library {
         int reservedOtherMedia = 0;
 
         for (Borrow borrow : borrows) {
-            if(borrow.getItem() instanceof Book){
+            if (borrow.getItem() instanceof Book) {
                 borrowedBook++;
                 reservedBook += borrow.getItem().getNumberReserved();
-            }else if(borrow.getItem() instanceof Ebook){
+            } else if (borrow.getItem() instanceof Ebook) {
                 borrowedEbook++;
                 reservedEbook += borrow.getItem().getNumberReserved();
-            }else if(borrow.getItem() instanceof CD){
+            } else if (borrow.getItem() instanceof CD) {
                 borrowedCD++;
                 reservedCD += borrow.getItem().getNumberReserved();
-            }else if(borrow.getItem() instanceof DVD){
+            } else if (borrow.getItem() instanceof DVD) {
                 borrowedDVD++;
                 reservedDVD += borrow.getItem().getNumberReserved();
-            }else if(borrow.getItem() instanceof OtherMedia){
+            } else if (borrow.getItem() instanceof OtherMedia) {
                 borrowedOtherMedia++;
                 reservedOtherMedia += borrow.getItem().getNumberReserved();
             }
         }
+
         System.out.println("------------------------------------");
         System.out.println("Borrowed books: " + borrowedBook);
         System.out.println("Borrowed ebooks: " + borrowedEbook);
-        System.out.println("Borrowed cds: " + borrowedCD);
-        System.out.println("Borrowed dvds: " + borrowedDVD);
-        System.out.println("Borrowed other medias: " + borrowedOtherMedia);
+        System.out.println("Borrowed CDs: " + borrowedCD);
+        System.out.println("Borrowed DVDs: " + borrowedDVD);
+        System.out.println("Borrowed other media: " + borrowedOtherMedia);
         System.out.println("------------------------------------");
         System.out.println("Reserved books: " + reservedBook);
         System.out.println("Reserved ebooks: " + reservedEbook);
-        System.out.println("Reserved cds: " + reservedCD);
-        System.out.println("Reserved dvds: " + reservedDVD);
-        System.out.println("Reserved other medias: " + reservedOtherMedia);
+        System.out.println("Reserved CDs: " + reservedCD);
+        System.out.println("Reserved DVDs: " + reservedDVD);
+        System.out.println("Reserved other media: " + reservedOtherMedia);
     }
 
-    public void usagePerfil(List<Borrow> borrows){
+    public void usagePerfil(List<Borrow> borrows) {
         int employee = 0;
         int postgraduate = 0;
         int undergraduate = 0;
         int teacher = 0;
-        
+
         for (Borrow borrow : borrows) {
-            if(borrow.getPerson() instanceof Employee){
+            if (borrow.getPerson() instanceof Employee) {
                 employee++;
-            }else if(borrow.getPerson() instanceof Postgraduate){
+            } else if (borrow.getPerson() instanceof Postgraduate) {
                 postgraduate++;
-            }else if(borrow.getPerson() instanceof Undergraduate){
+            } else if (borrow.getPerson() instanceof Undergraduate) {
                 undergraduate++;
-            }else if(borrow.getPerson() instanceof Teacher){
+            } else if (borrow.getPerson() instanceof Teacher) {
                 teacher++;
             }
         }
         System.out.println("------------------------------------");
-        System.out.println("Employees borrowed : " + employee + " items");
-        System.out.println("Postgraduates borrowed : " + postgraduate + " items");
-        System.out.println("Undergraduates borrowed : " + undergraduate + " items");
-        System.out.println("Teachers borrowed : " + teacher + " items");
+        System.out.println("Employees borrowed: " + employee + " items");
+        System.out.println("Postgraduates borrowed: " + postgraduate + " items");
+        System.out.println("Undergraduates borrowed: " + undergraduate + " items");
+        System.out.println("Teachers borrowed: " + teacher + " items");
         System.out.println("------------------------------------");
     }
 }
