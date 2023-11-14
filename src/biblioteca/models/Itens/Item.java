@@ -1,7 +1,6 @@
 package biblioteca.models.Itens;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import biblioteca.models.Membros.AuthorizationLevel;
@@ -24,8 +23,8 @@ public abstract class Item {
     private int numberReserved;
     private List<People> reservedList;
 
-    //Constructor
-    public Item(String title, String author, int codigo, String publisher, int publishmentYear, String genre, 
+    // Constructor
+    public Item(String title, String author, int codigo, String publisher, int publishmentYear, String genre,
                 String synopsis, String language, String cover, String detalhes) {
         this.reservedList = new ArrayList<>();
         this.title = title;
@@ -40,8 +39,8 @@ public abstract class Item {
         this.numberReserved = 0;
         this.detalhes = detalhes;
     }
-    
-    //Getters e Setters
+
+    // Getters e Setters
     public String getTitle() {
         return title;
     }
@@ -154,38 +153,42 @@ public abstract class Item {
         this.reservedList = reservedList;
     }
 
-    //Methods
-    public void addToReservedList(People person, People employee){
-        if(AccessControl.canReserveItem(employee)){
+    // Methods
+    public void addToReservedList(People person, People employee) {
+        if (AccessControl.canReserveItem(employee)) {
             this.reservedList.add(person);
             this.numberReserved += 1;
             System.out.println("Item reservado com sucesso!");
-        }else{
+        } else {
             System.out.println("Reserva falhou! Acesso negado.");
         }
     }
 
-    public void removeReservedList(People person, People employee){
-        if(this.numberReserved > 0){
-            if(AccessControl.canReserveItem(employee)){
+    public void removeReservedList(People person, People employee) {
+        if (this.numberReserved > 0) {
+            if (AccessControl.canReserveItem(employee)) {
                 this.reservedList.remove(person);
                 this.numberReserved -= 1;
-                System.out.println(person.getName() + "Removido da lista de reserva.");
-            }else{
+                System.out.println(person.getName() + " Removido da lista de reserva.");
+            } else {
                 System.out.println("Operação falhou! Acesso negado.");
             }
-        }else{
+        } else {
             System.out.println("Não há nenhuma reserva desse item.");
         }
     }
 
     public static class AccessControl {
         public static boolean canReserveItem(People person) {
-            if(person instanceof Employee){
+            if (person instanceof Employee) {
                 Employee employee = (Employee) person;
                 return employee.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR ||
-                    employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
-            }else return false;
+                        employee.getAuthorizationLevel() == AuthorizationLevel.ATTENDANT;
+            } else return false;
         }
     }
+}
+
+interface IItemMultimediaFactory {
+    Item createItem();
 }
