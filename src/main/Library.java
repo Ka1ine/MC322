@@ -67,7 +67,7 @@ public class Library {
     public People getPersonById(int accessId) {
         People person = null;
         for (People p : people) {
-            if (p.getUniversityIdentificationNumber() == accessId) {
+            if (p.getUniversityId() == accessId) {
                 person = p;
             }
         }
@@ -87,28 +87,28 @@ public class Library {
         System.out.println(borrow.getPerson().getName() + " pegou o item " + borrow.getItem().getTitle());
     }
 
-    public void printItemsList(List<Item> items) {
+    public void printItemsList() {
         System.out.println("Lista de Livros:");
         for (Item item : items) {
             System.out.println("Nome: " + item.getTitle());
         }
     }
 
-    public void printPeopleList(List<People> peoples) {
+    public void printPeopleList() {
         System.out.println("Lista de Membros:");
-        for (People people : peoples) {
-            System.out.println("Nome: " + people.getName());
+        for (People p : people) {
+            System.out.println("Nome: " + p.getName());
         }
     }
 
-    public void printBorrownsList(List<Borrow> borrows) {
+    public void printBorrownsList() {
         System.out.println("Lista de Emprestimos:");
         for (Borrow borrow : borrows) {
             System.out.println("Status emprestimos: " + borrow.getStatus());
         }
     }
 
-    public void generateMemberActivityReport(People person, LocalDate startDate, LocalDate endDate, List<Borrow> borrows) {
+    public void generateMemberActivityReport(People person, LocalDate startDate, LocalDate endDate) {
         System.out.println("Relatório de Atividades de Membros para " + person.getName() + ":");
 
         int borrowedItems = 0;

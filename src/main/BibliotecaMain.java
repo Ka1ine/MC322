@@ -103,7 +103,7 @@ public class BibliotecaMain {
 
             switch (opcaoItens) {
                 case 1:
-                    biblioteca.printItemsList(biblioteca.getItems());
+                    biblioteca.printItemsList();
                     break;
                 case 2:
                     adicionarItem(scanner, biblioteca);
@@ -150,7 +150,7 @@ public class BibliotecaMain {
 
             switch (opcaoMembros) {
                 case 1:
-                    biblioteca.printPeopleList(biblioteca.getPeople());
+                    biblioteca.printPeopleList();
                     break;
                 case 2:
                     adicionarMembro(scanner, biblioteca);
@@ -341,7 +341,7 @@ public class BibliotecaMain {
         Item objeto = null;
         People funcionario = null;
         for(People p : biblioteca.getPeople()){
-            if(p.getUniversityIdentificationNumber() == id){
+            if(p.getUniversityId() == id){
                 pessoa = p;
                 break;
             }
@@ -353,7 +353,7 @@ public class BibliotecaMain {
             }
         }
         for(People f : biblioteca.getPeople()){
-            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+            if(f.getUniversityId() == codigoFuncionario){
                 funcionario = f;
                 break;
             }
@@ -375,7 +375,7 @@ public class BibliotecaMain {
         scanner.nextLine();
         Borrow emprestimo = null;
         for(Borrow b : biblioteca.getBorrows()){
-            if(b.getPerson().getUniversityIdentificationNumber() == idPessoa && b.getItem().getCodigo() == codigoItem){
+            if(b.getPerson().getUniversityId() == idPessoa && b.getItem().getCodigo() == codigoItem){
                 emprestimo = b;
                 break;
             }
@@ -401,7 +401,7 @@ public class BibliotecaMain {
         Item objeto = null;
         People funcionario = null;
         for(People p : biblioteca.getPeople()){
-            if(p.getUniversityIdentificationNumber() == id){
+            if(p.getUniversityId() == id){
                 pessoa = p;
                 break;
             }
@@ -413,7 +413,7 @@ public class BibliotecaMain {
             }
         }
         for(People f : biblioteca.getPeople()){
-            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+            if(f.getUniversityId() == codigoFuncionario){
                 funcionario = f;
                 break;
             }
@@ -433,7 +433,7 @@ public class BibliotecaMain {
         scanner.nextLine();
         Borrow emprestimo = null;
         for(Borrow b : biblioteca.getBorrows()){
-            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityIdentificationNumber() == id && b.getEmployee().getUniversityIdentificationNumber() == codigoFuncionario){
+            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityId() == id && b.getEmployee().getUniversityId() == codigoFuncionario){
                 emprestimo = b;
                 break;
             }
@@ -797,7 +797,7 @@ public class BibliotecaMain {
         System.out.println("╚═════════════════════════════════════════════════╝");
         
         for(People pessoa : biblioteca.getPeople()){
-            if(pessoa.getUniversityIdentificationNumber() == identificacao){
+            if(pessoa.getUniversityId() == identificacao){
                 switch(atributo){
                     case 1:
                         pessoa.setName(novoValor);
@@ -823,7 +823,7 @@ public class BibliotecaMain {
         scanner.nextLine();
 
         for(People pessoa : biblioteca.getPeople()){
-            if(pessoa.getUniversityIdentificationNumber() == identificacao){
+            if(pessoa.getUniversityId() == identificacao){
                 biblioteca.getPeople().remove(pessoa);
                 System.out.println(pessoa.getName() + " removido");
                 return;
