@@ -1,5 +1,4 @@
 package biblioteca.models.Membros;
-import java.time.LocalDate;
 
 public class Employee extends People {
     private AuthorizationLevel authorizationLevel;
