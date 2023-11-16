@@ -38,12 +38,12 @@ public abstract class People {
 
     public void printNotifications(){
         int counter = 1;
-        System.out.println("--------  Suas Notificações  --------");
+        System.out.println("╔═══════════════  Notificacoes  ══════════════════╗");
         for (String elemento : notification) {
-            System.out.println(counter + ": " + elemento);
+            System.out.println("║ " + counter + ": " + elemento);
             counter =+ 1;
         }
-        System.out.println("-------------------------------------");
+        System.out.println("╚═════════════════════════════════════════════════╝");
     }
 
     public void removeNotification(int index){

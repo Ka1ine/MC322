@@ -37,6 +37,19 @@ public class BibliotecaMain {
         
         Scanner scanner = new Scanner(System.in);
 
+        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
+        Employee adminEmployee = new Employee("Nome do Funcionário", 12345, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee);
+        
+        Employee adminEmployee2 = new Employee("Nome do", 123456, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
+        biblioteca.addPerson(adminEmployee2);
+        
+        Undergraduate cleber = new Undergraduate("Cleber", 250267, "Endereço do Cleber", "Contato do Cleber", "Curso de Graduação do Cleber");
+        biblioteca.addPerson(cleber);
+
+        DVD dvd = new DVD("Título do DVD", "Autor do DVD", 123, "Editora do DVD", 2023, "Gênero do DVD", "Sinopse do DVD", "Idioma do DVD", "Capa do DVD", "Detalhes do DVD", "Elenco do DVD", 120, "Áudio do DVD", "Legendas do DVD", "Diretor do DVD", 2022, "Conservação do DVD", 10, 5);
+        biblioteca.addItem(dvd);
+
         while (true) {
             System.out.println("╔═════════════ Biblioteca Universitária ══════════╗");
             System.out.println("║                                                 ║");
@@ -140,7 +153,8 @@ public class BibliotecaMain {
             System.out.println("║ 2. Adicionar Membro                             ║");
             System.out.println("║ 3. Editar Membro                                ║");
             System.out.println("║ 4. Remover Membro                               ║");
-            System.out.println("║ 5. Voltar                                       ║");
+            System.out.println("║ 5. Mensagens Membro                             ║");
+            System.out.println("║ 6. Voltar                                       ║");
             System.out.println("║                                                 ║");
             System.out.println("║ Escolha uma opção:                              ║");
             System.out.println("╚═════════════════════════════════════════════════╝");
@@ -162,6 +176,9 @@ public class BibliotecaMain {
                     removerMembro(scanner, biblioteca);
                     break;
                 case 5:
+                    notificacaoMembro(scanner, biblioteca);
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -679,7 +696,7 @@ public class BibliotecaMain {
         for(Item item : biblioteca.getItems()){
             if(item.getCodigo() == codigo){
                 biblioteca.getItems().remove(item);
-                System.out.println("Livro " + item.getTitle() + " removido");
+                System.out.println("Item: " + item.getTitle() + " removido");
                 return;
             }
         }
@@ -828,6 +845,42 @@ public class BibliotecaMain {
                 System.out.println(pessoa.getName() + " removido");
                 return;
             }
+        }
+    }
+    private static void notificacaoMembro(Scanner scanner, Library biblioteca) {
+        System.out.println("╔═════════════════════════════════════════════════╗");
+        System.out.println("║              Digite sua identificação :         ║");
+        System.out.print("║ ");
+        int id = scanner.nextInt();
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        
+        scanner.nextLine();
+        People person = null;
+        for(People p : biblioteca.getPeople()){
+            if(p.getUniversityId() == id){
+                person = p;
+                p.printNotifications();
+                break;
+            }
+        }
+        System.out.println("╔═══════════════  Notificacoes  ══════════════════╗");
+        System.out.println("║       Deseja deletar alguma notificacao?        ║");
+        System.out.println("║ 1. Sim                                          ║");
+        System.out.println("║ 2. Não                                          ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        switch(number){
+        case 1:
+            System.out.println("Digite o numero da notificacao deseja remover:");
+            int codigo = scanner.nextInt();
+            scanner.nextLine();
+            person.removeNotification(codigo);
+            break;
+        case 2:
+            return;
         }
     }
 
