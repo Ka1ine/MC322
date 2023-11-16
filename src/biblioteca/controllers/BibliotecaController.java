@@ -4,7 +4,6 @@ import java.util.List;
 
 import biblioteca.models.ItemMultimidia;
 import biblioteca.models.Membro;
-import biblioteca.views.BibliotecaView;
 
 public interface BibliotecaController {
     List<ItemMultimidia> consultarItensDisponiveis();
