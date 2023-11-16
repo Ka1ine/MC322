@@ -796,7 +796,7 @@ public class BibliotecaMain {
         String novoValor = scanner.nextLine();
         System.out.println("╚═════════════════════════════════════════════════╝");
         
-        for(People pessoa : biblioteca.getPersons()){
+        for(People pessoa : biblioteca.getPeople()){
             if(pessoa.getUniversityIdentificationNumber() == identificacao){
                 switch(atributo){
                     case 1:
