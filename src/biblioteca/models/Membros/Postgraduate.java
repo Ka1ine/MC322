@@ -1,5 +1,4 @@
 package biblioteca.models.Membros;
-import java.time.LocalDate;
 
 public class Postgraduate extends People {
     private String postGraduationCourse;

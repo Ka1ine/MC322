@@ -24,12 +24,14 @@ public class Library {
 
     private static Library instance;
 
+    // Contructor
     Library() {
         this.people = new ArrayList<>();
         this.items = new ArrayList<>();
         this.borrows = new ArrayList<>();
     }
 
+    // Getters and Setters
     public static Library getInstance() {
         if (instance == null) {
             instance = new Library();
@@ -37,21 +39,11 @@ public class Library {
         return instance;
     }
 
-    public List<People> getPersons() {
+    public List<People> getPeople() {
         return people;
     }
 
-    public People getPersonById(int accessId) {
-        People person = null;
-        for (People p : people) {
-            if (p.getUniversityIdentificationNumber() == accessId) {
-                person = p;
-            }
-        }
-        return person;
-    }
-
-    public void setPersons(List<People> people) {
+    public void setPeople(List<People> people) {
     this.people = people;
     }
 
@@ -69,6 +61,17 @@ public class Library {
 
     public void setBorrows(List<Borrow> borrows) {
         this.borrows = borrows;
+    }
+
+    // Methods
+    public People getPersonById(int accessId) {
+        People person = null;
+        for (People p : people) {
+            if (p.getUniversityIdentificationNumber() == accessId) {
+                person = p;
+            }
+        }
+        return person;
     }
 
     public void addPerson(People person) {
@@ -91,7 +94,7 @@ public class Library {
         }
     }
 
-    public void printItemsPeople(List<People> peoples) {
+    public void printPeopleList(List<People> peoples) {
         System.out.println("Lista de Membros:");
         for (People people : peoples) {
             System.out.println("Nome: " + people.getName());
@@ -131,8 +134,6 @@ public class Library {
         System.out.println("Itens devolvidos: " + returnedItems);
         System.out.println("Total de multas aplicadas: " + totalFines);
     }
-
-
 
     public void itemsReport(List<Borrow> borrows) {
         int borrowedCD = 0;
