@@ -150,7 +150,7 @@ public class BibliotecaMain {
 
             switch (opcaoMembros) {
                 case 1:
-                    biblioteca.printItemsPeople(biblioteca.getPersons());
+                    biblioteca.printPeopleList(biblioteca.getPeople());
                     break;
                 case 2:
                     adicionarMembro(scanner, biblioteca);
@@ -340,7 +340,7 @@ public class BibliotecaMain {
         People pessoa = null;
         Item objeto = null;
         People funcionario = null;
-        for(People p : biblioteca.getPersons()){
+        for(People p : biblioteca.getPeople()){
             if(p.getUniversityIdentificationNumber() == id){
                 pessoa = p;
                 break;
@@ -352,7 +352,7 @@ public class BibliotecaMain {
                 break;
             }
         }
-        for(People f : biblioteca.getPersons()){
+        for(People f : biblioteca.getPeople()){
             if(f.getUniversityIdentificationNumber() == codigoFuncionario){
                 funcionario = f;
                 break;
@@ -400,7 +400,7 @@ public class BibliotecaMain {
         People pessoa = null;
         Item objeto = null;
         People funcionario = null;
-        for(People p : biblioteca.getPersons()){
+        for(People p : biblioteca.getPeople()){
             if(p.getUniversityIdentificationNumber() == id){
                 pessoa = p;
                 break;
@@ -412,7 +412,7 @@ public class BibliotecaMain {
                 break;
             }
         }
-        for(People f : biblioteca.getPersons()){
+        for(People f : biblioteca.getPeople()){
             if(f.getUniversityIdentificationNumber() == codigoFuncionario){
                 funcionario = f;
                 break;
@@ -822,9 +822,9 @@ public class BibliotecaMain {
         
         scanner.nextLine();
 
-        for(People pessoa : biblioteca.getPersons()){
+        for(People pessoa : biblioteca.getPeople()){
             if(pessoa.getUniversityIdentificationNumber() == identificacao){
-                biblioteca.getPersons().remove(pessoa);
+                biblioteca.getPeople().remove(pessoa);
                 System.out.println(pessoa.getName() + " removido");
                 return;
             }
