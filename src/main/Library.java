@@ -135,7 +135,7 @@ public class Library {
         System.out.println("Total de multas aplicadas: " + totalFines);
     }
 
-    public void itemsReport(List<Borrow> borrows) {
+    public void itemsReport() {
         int borrowedCD = 0;
         int borrowedDVD = 0;
         int borrowedEbook = 0;
@@ -180,7 +180,7 @@ public class Library {
         System.out.println("Reserved other media: " + reservedOtherMedia);
     }
 
-    public void usagePerfil(List<Borrow> borrows) {
+    public void usagePerfil() {
         int employee = 0;
         int postgraduate = 0;
         int undergraduate = 0;

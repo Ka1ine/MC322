@@ -64,7 +64,7 @@ public class BibliotecaMain {
                     break;
                 case 3:
                     // Menu de Geração de Relatórios e Estatísticas
-                    // menuRelatoriosEstatisticas(scanner, relatorioView);
+                    menuRelatoriosEstatisticas(scanner);
                     break;
                 case 4:
                     menuAdministracaoFuncionarios(scanner, biblioteca);
@@ -169,7 +169,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
+    private static void menuRelatoriosEstatisticas(Scanner scanner) {
         while (true) {
             System.out.println("╔═══════════ Relatórios e Estatísticas ═══════════╗");
             System.out.println("║ 1. Relatório de Atividades de Membros           ║");
