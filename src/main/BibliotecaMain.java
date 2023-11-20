@@ -32,23 +32,9 @@ public class BibliotecaMain {
 
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
-        // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
         Library biblioteca = Library.getInstance() ;
         
         Scanner scanner = new Scanner(System.in);
-
-        AuthorizationLevel adminAuthorizationLevel = AuthorizationLevel.ADMINISTRATOR;
-        Employee adminEmployee = new Employee("Nome do Funcionário", 12345, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
-        biblioteca.addPerson(adminEmployee);
-        
-        Employee adminEmployee2 = new Employee("Nome do", 123456, "Endereço do Funcionário", "Contato do Funcionário", adminAuthorizationLevel);
-        biblioteca.addPerson(adminEmployee2);
-        
-        Undergraduate cleber = new Undergraduate("Cleber", 250267, "Endereço do Cleber", "Contato do Cleber", "Curso de Graduação do Cleber");
-        biblioteca.addPerson(cleber);
-
-        DVD dvd = new DVD("Título do DVD", "Autor do DVD", 123, "Editora do DVD", 2023, "Gênero do DVD", "Sinopse do DVD", "Idioma do DVD", "Capa do DVD", "Detalhes do DVD", "Elenco do DVD", 120, "Áudio do DVD", "Legendas do DVD", "Diretor do DVD", 2022, "Conservação do DVD", 10, 5);
-        biblioteca.addItem(dvd);
 
         while (true) {
             System.out.println("╔═════════════ Biblioteca Universitária ══════════╗");
@@ -68,15 +54,12 @@ public class BibliotecaMain {
 
             switch (opcao) {
                 case 1:
-                    // Menu de Gerenciamento de Itens
                     menuGerenciamentoItens(scanner, bibliotecaView, biblioteca);
                     break;
                 case 2:
-                    // Menu de Gerenciamento de Membros
                     menuGerenciamentoMembros(scanner, membroView, biblioteca);
                     break;
                 case 3:
-                    // Menu de Geração de Relatórios e Estatísticas
                     menuRelatoriosEstatisticas(scanner);
                     break;
                 case 4:
@@ -336,11 +319,9 @@ public class BibliotecaMain {
     }
 
     private static void menuAtendentes(Scanner scanner) {
-        // Lógica para administração de atendentes
     }
 
     private static void menuGerentes(Scanner scanner) {
-        // Lógica para administração de gerentes
     }
 
     // Métodos para realizar empréstimo, renovação e reserva
@@ -884,34 +865,27 @@ public class BibliotecaMain {
         }
     }
 
-    // Métodos para gerar relatórios e estatísticas
     private static void gerarRelatorioAtividadesMembros() {
-        // Lógica para gerar o Relatório de Atividades de Membros
         System.out.println("Gerando Relatório de Atividades de Membros");
     }
 
     private static void gerarRelatorioUsoItens() {
-        // Lógica para gerar o Relatório de Uso de Itens Multimídia
         System.out.println("Gerando Relatório de Uso de Itens Multimídia");
     }
 
     private static void gerarRelatorioMultas() {
-        // Lógica para gerar o Relatório de Multas e Pagamentos
         System.out.println("Gerando Relatório de Multas e Pagamentos");
     }
 
     private static void gerarRelatorioDisponibilidadeItens() {
-        // Lógica para gerar o Relatório de Disponibilidade de Itens
         System.out.println("Gerando Relatório de Disponibilidade de Itens");
     }
 
     private static void gerarEstatisticasUsoPorPerfil() {
-        // Lógica para gerar as Estatísticas de Uso por Perfil de Membro
         System.out.println("Gerando Estatísticas de Uso por Perfil de Membro");
     }
 
     private static void gerarRelatorioItensPopulares() {
-        // Lógica para gerar o Relatório de Itens Mais Populares
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
 }
