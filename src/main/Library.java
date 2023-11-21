@@ -24,12 +24,14 @@ public class Library {
 
     private static Library instance;
 
+    // Contructor
     Library() {
         this.people = new ArrayList<>();
         this.items = new ArrayList<>();
         this.borrows = new ArrayList<>();
     }
 
+    // Getters and Setters
     public static Library getInstance() {
         if (instance == null) {
             instance = new Library();
@@ -37,21 +39,11 @@ public class Library {
         return instance;
     }
 
-    public List<People> getPersons() {
+    public List<People> getPeople() {
         return people;
     }
 
-    public People getPersonById(int accessId) {
-        People person = null;
-        for (People p : people) {
-            if (p.getUniversityIdentificationNumber() == accessId) {
-                person = p;
-            }
-        }
-        return person;
-    }
-
-    public void setPersons(List<People> people) {
+    public void setPeople(List<People> people) {
     this.people = people;
     }
 
@@ -71,6 +63,17 @@ public class Library {
         this.borrows = borrows;
     }
 
+    // Methods
+    public People getPersonById(int accessId) {
+        People person = null;
+        for (People p : people) {
+            if (p.getUniversityId() == accessId) {
+                person = p;
+            }
+        }
+        return person;
+    }
+
     public void addPerson(People person) {
         people.add(person);
     }
@@ -84,28 +87,28 @@ public class Library {
         System.out.println(borrow.getPerson().getName() + " pegou o item " + borrow.getItem().getTitle());
     }
 
-    public void printItemsList(List<Item> items) {
+    public void printItemsList() {
         System.out.println("Lista de Livros:");
         for (Item item : items) {
             System.out.println("Nome: " + item.getTitle());
         }
     }
 
-    public void printItemsPeople(List<People> peoples) {
+    public void printPeopleList() {
         System.out.println("Lista de Membros:");
-        for (People people : peoples) {
-            System.out.println("Nome: " + people.getName());
+        for (People p : people) {
+            System.out.println("Nome: " + p.getName());
         }
     }
 
-    public void printBorrownsList(List<Borrow> borrows) {
+    public void printBorrownsList() {
         System.out.println("Lista de Emprestimos:");
         for (Borrow borrow : borrows) {
             System.out.println("Status emprestimos: " + borrow.getStatus());
         }
     }
 
-    public void generateMemberActivityReport(People person, LocalDate startDate, LocalDate endDate, List<Borrow> borrows) {
+    public void generateMemberActivityReport(People person, LocalDate startDate, LocalDate endDate) {
         System.out.println("Relatório de Atividades de Membros para " + person.getName() + ":");
 
         int borrowedItems = 0;
@@ -132,9 +135,7 @@ public class Library {
         System.out.println("Total de multas aplicadas: " + totalFines);
     }
 
-
-
-    public void itemsReport(List<Borrow> borrows) {
+    public void itemsReport() {
         int borrowedCD = 0;
         int borrowedDVD = 0;
         int borrowedEbook = 0;
@@ -179,7 +180,7 @@ public class Library {
         System.out.println("Reserved other media: " + reservedOtherMedia);
     }
 
-    public void usagePerfil(List<Borrow> borrows) {
+    public void usagePerfil() {
         int employee = 0;
         int postgraduate = 0;
         int undergraduate = 0;

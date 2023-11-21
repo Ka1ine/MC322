@@ -23,7 +23,7 @@ public class MembroImpl implements Membro{
 
     @Override
     public int getIdentificacao(People pessoa) {
-        return pessoa.getUniversityIdentificationNumber();
+        return pessoa.getUniversityId();
     }
 
     @Override

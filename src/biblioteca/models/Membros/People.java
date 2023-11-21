@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class People {
     private String name;
-    private int universityIdentificationNumber;
+    private int universityId;
     private String address;
     private String contact;
     private LocalDate registrationDate;
@@ -17,9 +17,9 @@ public abstract class People {
     protected int borrowedNumber;
 
     //Constructor
-    public People(String name, int universityIdentificationNumber, String address, String contact) {
+    public People(String name, int universityId, String address, String contact) {
         this.name = name;
-        this.universityIdentificationNumber = universityIdentificationNumber;
+        this.universityId = universityId;
         this.address = address;
         this.contact = contact;
         this.registrationDate = LocalDate.now();
@@ -38,12 +38,12 @@ public abstract class People {
 
     public void printNotifications(){
         int counter = 1;
-        System.out.println("--------  Suas Notificações  --------");
+        System.out.println("╔═══════════════  Notificacoes  ══════════════════╗");
         for (String elemento : notification) {
-            System.out.println(counter + ": " + elemento);
+            System.out.println("║ " + counter + ": " + elemento);
             counter =+ 1;
         }
-        System.out.println("-------------------------------------");
+        System.out.println("╚═════════════════════════════════════════════════╝");
     }
 
     public void removeNotification(int index){
@@ -67,11 +67,11 @@ public abstract class People {
         this.name = name;
     }
 
-    public int getUniversityIdentificationNumber() {
-        return universityIdentificationNumber;
+    public int getUniversityId() {
+        return universityId;
     }
-    public void setUniversityIdentificationNumber(int universityIdentificationNumber) {
-        this.universityIdentificationNumber = universityIdentificationNumber;
+    public void setUniversityId(int universityId) {
+        this.universityId = universityId;
     }
 
     public String getAddress() {

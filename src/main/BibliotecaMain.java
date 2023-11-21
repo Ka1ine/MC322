@@ -1,5 +1,4 @@
 package main;
-import main.Library;
 import biblioteca.controllers.*;
 import biblioteca.models.*;
 import biblioteca.models.Itens.Book;
@@ -33,38 +32,35 @@ public class BibliotecaMain {
 
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
-        // RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
         Library biblioteca = Library.getInstance() ;
         
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("---- Menu Biblioteca ----");
-            System.out.println();
-            System.out.println("1. Gerenciamento de Itens");
-            System.out.println("2. Gerenciamento de Membros");
-            System.out.println("3. Geração de Relatórios e Estatísticas");
-            System.out.println("4. Administração de Funcionários");
-            System.out.println("5. Sair");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
-
+            System.out.println("╔═════════════ Biblioteca Universitária ══════════╗");
+            System.out.println("║                                                 ║");
+            System.out.println("║ 1. Gerenciamento de Itens                       ║");
+            System.out.println("║ 2. Gerenciamento de Membros                     ║");
+            System.out.println("║ 3. Geração de Relatórios e Estatísticas         ║");
+            System.out.println("║ 4. Administração de Funcionários                ║");
+            System.out.println("║ 5. Sair                                         ║");
+            System.out.println("║                                                 ║");
+            System.out.println("║ Escolha uma opção:                              ║");
+            System.out.println("╚═════════════════════════════════════════════════╝");
+            
+            
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
                 case 1:
-                    // Menu de Gerenciamento de Itens
                     menuGerenciamentoItens(scanner, bibliotecaView, biblioteca);
                     break;
                 case 2:
-                    // Menu de Gerenciamento de Membros
                     menuGerenciamentoMembros(scanner, membroView, biblioteca);
                     break;
                 case 3:
-                    // Menu de Geração de Relatórios e Estatísticas
-                    // menuRelatoriosEstatisticas(scanner, relatorioView);
+                    menuRelatoriosEstatisticas(scanner);
                     break;
                 case 4:
                     menuAdministracaoFuncionarios(scanner, biblioteca);
@@ -81,27 +77,29 @@ public class BibliotecaMain {
 
     private static void menuGerenciamentoItens(Scanner scanner, BibliotecaView bibliotecaView, Library biblioteca) {
         while (true) {
-            System.out.println("---- Menu Gerenciamento de Itens ----");
-            System.out.println();
-            System.out.println("1. Listar Itens Disponíveis");
-            System.out.println("2. Adicionar Item");
-            System.out.println("3. Editar Item");
-            System.out.println("4. Remover Item");
-            System.out.println("5. Empréstimo de Itens");
-            System.out.println("6. Renovação de Empréstimos");
-            System.out.println("7. Reservas de Itens");
-            System.out.println("8. Devolver Item");
-            System.out.println("9. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+            System.out.println("╔═════════════ Gerenciamento de Itens ════════════╗");
+            System.out.println("║                                                 ║");
+            System.out.println("║ 1. Listar Itens Disponíveis                     ║");
+            System.out.println("║ 2. Adicionar Item                               ║");
+            System.out.println("║ 3. Editar Item                                  ║");
+            System.out.println("║ 4. Remover Item                                 ║");
+            System.out.println("║ 5. Empréstimo de Itens                          ║");
+            System.out.println("║ 6. Renovação de Empréstimos                     ║");
+            System.out.println("║ 7. Reservas de Itens                            ║");
+            System.out.println("║ 8. Devolver Item                                ║");
+            System.out.println("║ 9. Voltar                                       ║");
+            System.out.println("║                                                 ║");
+            System.out.println("║ Escolha uma opção:                              ║");
+            System.out.println("╚═════════════════════════════════════════════════╝");
+            
+            
 
             int opcaoItens = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcaoItens) {
                 case 1:
-                    biblioteca.printItemsList(biblioteca.getItems());
+                    biblioteca.printItemsList();
                     break;
                 case 2:
                     adicionarItem(scanner, biblioteca);
@@ -133,23 +131,23 @@ public class BibliotecaMain {
 
     private static void menuGerenciamentoMembros(Scanner scanner, MembroView membroView, Library biblioteca) {
         while (true) {
-            System.out.println("---- Menu Gerenciamento de Membros ----");
-            System.out.println();
-            System.out.println("1. Listar Membros");
-            System.out.println("2. Adicionar Membro");
-            System.out.println("3. Editar Membro");
-            System.out.println("4. Remover Membro");
-            System.out.println("5. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+            System.out.println("╔════════════ Gerenciamento de Membros ═══════════╗");
+            System.out.println("║ 1. Listar Membros                               ║");
+            System.out.println("║ 2. Adicionar Membro                             ║");
+            System.out.println("║ 3. Editar Membro                                ║");
+            System.out.println("║ 4. Remover Membro                               ║");
+            System.out.println("║ 5. Mensagens Membro                             ║");
+            System.out.println("║ 6. Voltar                                       ║");
+            System.out.println("║                                                 ║");
+            System.out.println("║ Escolha uma opção:                              ║");
+            System.out.println("╚═════════════════════════════════════════════════╝");
 
             int opcaoMembros = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcaoMembros) {
                 case 1:
-                    biblioteca.printItemsPeople(biblioteca.getPersons());
+                    biblioteca.printPeopleList();
                     break;
                 case 2:
                     adicionarMembro(scanner, biblioteca);
@@ -161,6 +159,9 @@ public class BibliotecaMain {
                     removerMembro(scanner, biblioteca);
                     break;
                 case 5:
+                    notificacaoMembro(scanner, biblioteca);
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -168,20 +169,19 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
+    private static void menuRelatoriosEstatisticas(Scanner scanner) {
         while (true) {
-            System.out.println("---- Menu Relatórios e Estatísticas ----");
-            System.out.println();
-            System.out.println("1. Gerar Relatório de Atividades de Membros");
-            System.out.println("2. Gerar Relatório de Uso de Itens Multimídia");
-            System.out.println("3. Gerar Relatório de Multas e Pagamentos");
-            System.out.println("4. Gerar Relatório de Disponibilidade de Itens");
-            System.out.println("5. Gerar Estatísticas de Uso por Perfil de Membro");
-            System.out.println("6. Gerar Relatório de Itens Mais Populares");
-            System.out.println("7. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+            System.out.println("╔═══════════ Relatórios e Estatísticas ═══════════╗");
+            System.out.println("║ 1. Relatório de Atividades de Membros           ║");
+            System.out.println("║ 2. Relatório de Uso de Itens Multimídia         ║");
+            System.out.println("║ 3. Relatório de Multas e Pagamentos             ║");
+            System.out.println("║ 4. Relatório de Disponibilidade de Itens        ║");
+            System.out.println("║ 5. Estatísticas de Uso por Perfil de Membro     ║");
+            System.out.println("║ 6. Relatório de Itens Mais Populares            ║");
+            System.out.println("║ 7. Voltar                                       ║");
+            System.out.println("║                                                 ║");
+            System.out.println("║ Escolha uma opção:                              ║");
+            System.out.println("╚═════════════════════════════════════════════════╝");
 
             int opcaoRelatorios = scanner.nextInt();
             scanner.nextLine();
@@ -215,15 +215,14 @@ public class BibliotecaMain {
 
     private static void menuAdministracaoFuncionarios(Scanner scanner, Library biblioteca) {
         while (true) {
-            System.out.println("---- Menu Administração de Funcionários ----");
-            System.out.println();
-            System.out.println("1. Administradores");
-            System.out.println("2. Atendentes");
-            System.out.println("3. Gerentes");
-            System.out.println("4. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+            System.out.println("╔═════════ Administração de Funcionários ═════════╗");
+            System.out.println("║ 1. Administradores                              ║");
+            System.out.println("║ 2. Atendentes                                   ║");
+            System.out.println("║ 3. Gerentes                                     ║");
+            System.out.println("║ 4. Voltar                                       ║");
+            System.out.println("║                                                 ║");
+            System.out.println("║ Escolha uma opção:                              ║");
+            System.out.println("╚═════════════════════════════════════════════════╝");
 
             int opcaoFuncionarios = scanner.nextInt();
             scanner.nextLine();
@@ -256,20 +255,20 @@ public class BibliotecaMain {
         try{
             Employee pessoa = (Employee) biblioteca.getPersonById(acessoAdministrador);
             if (pessoa.getAuthorizationLevel() == AuthorizationLevel.ADMINISTRATOR) {
-                System.out.println("---- Menu do Administrador ----");
-                System.out.println();
-                System.out.println("1. Pegar Atributo de Professor");
-                System.out.println("2. Pegar Método de Professor");
-                System.out.println("3. Pegar Atributo de Funcionário");
-                System.out.println("4. Pegar Método de Funcionário");
-                System.out.println("5. Pegar Atributo de Pos Graduando");
-                System.out.println("6. Pegar Método de Pos Graduando");
-                System.out.println("7. Pegar Atributo de Aluno de Graduação");
-                System.out.println("8. Pegar Método de Aluno de Graduação");
-                System.out.println("9. Voltar");
-                System.out.println();
-                System.out.println();
-                System.out.print("Escolha uma opção: ");
+                System.out.println("╔═════════════ Menu do Administrador ═════════════╗");
+                System.out.println("║ 1. Pegar Atributo de Professor                  ║");
+                System.out.println("║ 2. Pegar Método de Professor                    ║");
+                System.out.println("║ 3. Pegar Atributo de Funcionário                ║");
+                System.out.println("║ 4. Pegar Método de Funcionário                  ║");
+                System.out.println("║ 5. Pegar Atributo de Pos Graduando              ║");
+                System.out.println("║ 6. Pegar Método de Pos Graduando                ║");
+                System.out.println("║ 7. Pegar Atributo de Aluno de Graduação         ║");
+                System.out.println("║ 8. Pegar Método de Aluno de Graduação           ║");
+                System.out.println("║ 9. Voltar                                       ║");
+                System.out.println("║                                                 ║");
+                System.out.println("║ Escolha uma opção:                              ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+
                 int opcaoAdministrador = scanner.nextInt();
                 scanner.nextLine();
 
@@ -320,11 +319,9 @@ public class BibliotecaMain {
     }
 
     private static void menuAtendentes(Scanner scanner) {
-        // Lógica para administração de atendentes
     }
 
     private static void menuGerentes(Scanner scanner) {
-        // Lógica para administração de gerentes
     }
 
     // Métodos para realizar empréstimo, renovação e reserva
@@ -341,8 +338,8 @@ public class BibliotecaMain {
         People pessoa = null;
         Item objeto = null;
         People funcionario = null;
-        for(People p : biblioteca.getPersons()){
-            if(p.getUniversityIdentificationNumber() == id){
+        for(People p : biblioteca.getPeople()){
+            if(p.getUniversityId() == id){
                 pessoa = p;
                 break;
             }
@@ -353,8 +350,8 @@ public class BibliotecaMain {
                 break;
             }
         }
-        for(People f : biblioteca.getPersons()){
-            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+        for(People f : biblioteca.getPeople()){
+            if(f.getUniversityId() == codigoFuncionario){
                 funcionario = f;
                 break;
             }
@@ -376,7 +373,7 @@ public class BibliotecaMain {
         scanner.nextLine();
         Borrow emprestimo = null;
         for(Borrow b : biblioteca.getBorrows()){
-            if(b.getPerson().getUniversityIdentificationNumber() == idPessoa && b.getItem().getCodigo() == codigoItem){
+            if(b.getPerson().getUniversityId() == idPessoa && b.getItem().getCodigo() == codigoItem){
                 emprestimo = b;
                 break;
             }
@@ -401,8 +398,8 @@ public class BibliotecaMain {
         People pessoa = null;
         Item objeto = null;
         People funcionario = null;
-        for(People p : biblioteca.getPersons()){
-            if(p.getUniversityIdentificationNumber() == id){
+        for(People p : biblioteca.getPeople()){
+            if(p.getUniversityId() == id){
                 pessoa = p;
                 break;
             }
@@ -413,8 +410,8 @@ public class BibliotecaMain {
                 break;
             }
         }
-        for(People f : biblioteca.getPersons()){
-            if(f.getUniversityIdentificationNumber() == codigoFuncionario){
+        for(People f : biblioteca.getPeople()){
+            if(f.getUniversityId() == codigoFuncionario){
                 funcionario = f;
                 break;
             }
@@ -434,7 +431,7 @@ public class BibliotecaMain {
         scanner.nextLine();
         Borrow emprestimo = null;
         for(Borrow b : biblioteca.getBorrows()){
-            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityIdentificationNumber() == id && b.getEmployee().getUniversityIdentificationNumber() == codigoFuncionario){
+            if(b.getItem().getCodigo() == codigoItem && b.getPerson().getUniversityId() == id && b.getEmployee().getUniversityId() == codigoFuncionario){
                 emprestimo = b;
                 break;
             }
@@ -444,129 +441,149 @@ public class BibliotecaMain {
 
     // Métodos para adicionar, editar e remover itens e membros
     private static void adicionarItem(Scanner scanner, Library biblioteca) {
-        System.out.println("---- Qual item deseja adicionar ----");
-            System.out.println();
-            System.out.println("1. Livro");
-            System.out.println("2. Ebook");
-            System.out.println("3. CD");
-            System.out.println("4. DVD");
-            System.out.println("5. Outro");
-            System.out.println("6. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+        System.out.println("╔═════════════════ Adicionar Item ════════════════╗");
+        System.out.println("║ 1. Livro                                        ║");
+        System.out.println("║ 2. Ebook                                        ║");
+        System.out.println("║ 3. CD                                           ║");
+        System.out.println("║ 4. DVD                                          ║");
+        System.out.println("║ 5. Outro                                        ║");
+        System.out.println("║ 6. Voltar                                       ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        
         int qualItem = scanner.nextInt();
         scanner.nextLine();
 
-        if(qualItem == 6) return;
+        if (qualItem == 6) return;
 
-        System.out.println("Digite o titulo:");
+        System.out.println("╔══════════════════ Adicionar ═══════════════════╗");
+        System.out.println("║ Insira as informações do Item                  ║");
+        System.out.println("║                                                ║");
+        System.out.print("║ Título: ");
         String titulo = scanner.nextLine();
-        System.out.println("Digite o autor:");
+        System.out.print("║ Autor: ");
         String autor = scanner.nextLine();
-        System.out.println("Digite o codigo do item:");
+        System.out.print("║ Código do Item: ");
         int codigo = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Digite a editora:");
+        System.out.print("║ Editora: ");
         String editora = scanner.nextLine();
-        System.out.println("Digite o ano de publicacao:");
+        System.out.print("║ Ano de Publicação: ");
         int anoPublicacao = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Digite o genero:");
+        System.out.print("║ Gênero: ");
         String genero = scanner.nextLine();
-        System.out.println("Digite o sinopse:");
+        System.out.print("║ Sinopse: ");
         String sinopse = scanner.nextLine();
-        System.out.println("Digite a lingua:");
+        System.out.print("║ Língua: ");
         String lingua = scanner.nextLine();
-        System.out.println("Insira a capa:");
+        System.out.print("║ URL da Capa: ");
         String capa = scanner.nextLine();
-        System.out.println("Digite o numero de copias:");
+        System.out.print("║ Número de Cópias: ");
         int numeroCopias = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Digite quantas copias estao disponiveis:");
+        System.out.print("║ Cópias Disponíveis: ");
         int copiasDisponiveis = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Digite os detalhes:");
+        System.out.print("║ Detalhes: ");
         String detalhes = scanner.nextLine();
-
+        
         switch(qualItem){
             case 1:
-                System.out.println("Digite o ISBN:");
+                System.out.print("║ ISBN: ");
                 String isbn = scanner.nextLine();
-                System.out.println("Digite a Edicao:");
+                System.out.print("║ Edição: ");
                 String edicao = scanner.nextLine();
-                System.out.println("Digite a localizacao na biblioteca:");
+                System.out.print("║ Localização na Biblioteca: ");
                 String localizacao = scanner.nextLine();
-                System.out.println("Digite o estado de conservacao:");
+                System.out.print("║ Estado de Conservação: ");
                 String conservacao = scanner.nextLine();
-                Book novoBook = new Book(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
-                capa, detalhes, isbn, edicao, numeroCopias, copiasDisponiveis, localizacao, conservacao);
+                System.out.println("║                                                 ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+                        
+                Book novoBook = new Book(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua,
+                        capa, detalhes, isbn, edicao, numeroCopias, copiasDisponiveis, localizacao, conservacao);
                 biblioteca.addItem(novoBook);
                 break;
             case 2:
-                System.out.println("Digite o formato:");
+                System.out.print("║ Formato: ");
                 String formato = scanner.nextLine();
-                System.out.println("Digite o numero de licensas:");
-                int numeroLicensas = scanner.nextInt();
+                System.out.print("║ Número de Licenças: ");
+                int numeroLicencas = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("Digite o URL:");
+                System.out.print("║ URL: ");
                 String url = scanner.nextLine();
-                System.out.println("Digite os requisitos da maquina:");
+                System.out.print("║ Requisitos da Máquina: ");
                 String requisitos = scanner.nextLine();
-                System.out.println("Digite a data disponível:(dia/mes/ano)");
+                System.out.print("║ Data Disponível (dia/mes/ano): ");
                 int dia = scanner.nextInt();
                 int mes = scanner.nextInt();
                 int ano = scanner.nextInt();
                 LocalDate dataDisponivel = LocalDate.of(ano, mes, dia);
-                System.out.println("Digite o tamanho do arquivo:(kb)");
+                System.out.print("║ Tamanho do Arquivo (KB): ");
                 double tamanhoArquivo = scanner.nextDouble();
                 scanner.nextLine();
-                Ebook novoEbook = new Ebook(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
-                capa, detalhes, formato, numeroLicensas, url, requisitos, dataDisponivel, tamanhoArquivo, numeroCopias, 
-                copiasDisponiveis);
+                System.out.println("║                                                 ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+            
+                Ebook novoEbook = new Ebook(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua,
+                        capa, detalhes, formato, numeroLicencas, url, requisitos, dataDisponivel, tamanhoArquivo, numeroCopias,
+                        copiasDisponiveis);
+                
                 biblioteca.addItem(novoEbook);
+            
                 break;
             case 3:
-                System.out.println("Digite as musicas:");
+                System.out.print("║ Músicas: ");
                 String musicas = scanner.nextLine();
-                System.out.println("Digite a duracao total:(em minutos)");
+                System.out.print("║ Duração Total (em minutos): ");
                 int duracao = scanner.nextInt();
                 scanner.nextLine();
+                System.out.println("║                                                 ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+                
                 CD novoCD = new CD(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
                 capa, detalhes, musicas, duracao, numeroCopias, copiasDisponiveis);
                 biblioteca.addItem(novoCD);
                 break;
             case 4:
-                System.out.println("Digite o elenco:");
+                System.out.print("║ Elenco: ");
                 String elenco = scanner.nextLine();
-                System.out.println("Digite a duracao total:(em minutos)");
+                System.out.print("║ Duração Total (em minutos): ");
                 int duracaoDVD = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("Digite os audios disponiveis:");
+                System.out.print("║ Áudios Disponíveis: ");
                 String audios = scanner.nextLine();
-                System.out.println("Digite as legendas disponiveis:");
+                System.out.print("║ Legendas Disponíveis: ");
                 String legendas = scanner.nextLine();
-                System.out.println("Digite o diretor:");
+                System.out.print("║ Diretor: ");
                 String diretor = scanner.nextLine();
-                System.out.println("Digite o ano de lancamento");
+                System.out.print("║ Ano de Lançamento: ");
                 int anoLancamento = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("Digite o estado de conservacao:");
+                System.out.print("║ Estado de Conservação: ");
                 String conservacaoDVD = scanner.nextLine();
+                System.out.println("║                                                 ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+                
                 DVD novoDVD = new DVD(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
                 capa, detalhes, elenco, duracaoDVD, audios, legendas, diretor, anoLancamento, conservacaoDVD, 
                 numeroCopias, copiasDisponiveis);
                 biblioteca.addItem(novoDVD);
                 break;
             case 5:
-                System.out.println("Digite o tipo da midia:");
+                System.out.print("║ Tipo da Mídia: ");
                 String tipo = scanner.nextLine();
-                System.out.println("Digite o formato da midia:");
+                System.out.print("║ Formato da Mídia: ");
                 String formatoMidia = scanner.nextLine();
-                System.out.println("Digite o local na biblioteca:");
+                System.out.print("║ Local na Biblioteca: ");
                 String localizacaoMidia = scanner.nextLine();
-                System.out.println("Digite o estado de conservacao:");
+                System.out.print("║ Estado de Conservação: ");
                 String conservacaoMidia = scanner.nextLine();
+                System.out.println("║                                                 ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+
                 OtherMedia novoOtherMedia = new OtherMedia(titulo, autor, codigo, editora, anoPublicacao, genero, sinopse, lingua, 
                 capa, detalhes, tipo, formatoMidia, localizacaoMidia, conservacaoMidia, numeroCopias, copiasDisponiveis);
                 biblioteca.addItem(novoOtherMedia);
@@ -577,32 +594,39 @@ public class BibliotecaMain {
     }
 
     private static void editarItem(Scanner scanner, Library biblioteca) {
-        System.out.println("Digite o codigo do item que deseja editar:");
+
+        System.out.println("╔══════════════════ Editar Item ══════════════════╗");
+        System.out.println("║ Digite o código do item a ser editado:          ║");
+        System.out.print("║ ");
         int codigo = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("---- O que deseja editar nesse item? ----");
-            System.out.println();
-            System.out.println("1. Titulo");
-            System.out.println("2. Autor");
-            System.out.println("3. Editora");
-            System.out.println("4. Ano de publicacao");
-            System.out.println("5. Genero");
-            System.out.println("6. Sinopse");
-            System.out.println("7. Lingua");
-            System.out.println("8. Capa");
-            System.out.println("9. Numero de copias");
-            System.out.println("10. Copias disponiveis");
-            System.out.println("11. detalhes");
-            System.out.println("12. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+        System.out.println("║ ------- O que deseja editar neste item? ------- ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ 1. Título                                       ║");
+        System.out.println("║ 2. Autor                                        ║");
+        System.out.println("║ 3. Editora                                      ║");
+        System.out.println("║ 4. Ano de Publicação                            ║");
+        System.out.println("║ 5. Gênero                                       ║");
+        System.out.println("║ 6. Sinopse                                      ║");
+        System.out.println("║ 7. Língua                                       ║");
+        System.out.println("║ 8. Capa                                         ║");
+        System.out.println("║ 9. Número de Cópias                             ║");
+        System.out.println("║ 10. Cópias Disponíveis                          ║");
+        System.out.println("║ 11. Detalhes                                    ║");
+        System.out.println("║ 12. Voltar                                      ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
         int atributo = scanner.nextInt();
         scanner.nextLine();
         if(atributo == 12) return;
         
-        System.out.println("`Digite o novo valor desse atributo:");
+        System.out.println("╔═════════════════════════════════════════════════╗");
+        System.out.println("║ Digite o novo valor desse atributo:             ║");
+        System.out.print("║ ");
         String novoValor = scanner.nextLine();
+        System.out.println("╚═════════════════════════════════════════════════╝");
+
 
         for(Item item : biblioteca.getItems()){
             if(item.getCodigo() == codigo){
@@ -653,65 +677,67 @@ public class BibliotecaMain {
         for(Item item : biblioteca.getItems()){
             if(item.getCodigo() == codigo){
                 biblioteca.getItems().remove(item);
-                System.out.println("Livro " + item.getTitle() + " removido");
+                System.out.println("Item: " + item.getTitle() + " removido");
                 return;
             }
         }
-
     }
 
     private static void adicionarMembro(Scanner scanner, Library biblioteca) {
-        System.out.println("---- Qual tipo de membro deseja adicionar? ----");
-            System.out.println();
-            System.out.println("1. Aluno de graduação");
-            System.out.println("2. Aluno de pos graduação");
-            System.out.println("3. Funcionário");
-            System.out.println("4. Professor");
-            System.out.println("5. Voltar");
-            System.out.println();
-            System.out.println();
-            System.out.print("Escolha uma opção: ");
+        System.out.println("╔═════════════════ Adicionar Membro ══════════════╗");
+        System.out.println("║ Qual tipo de membro deseja adicionar?           ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ 1. Aluno de Graduação                           ║");
+        System.out.println("║ 2. Aluno de Pós-Graduação                       ║");
+        System.out.println("║ 3. Funcionário                                  ║");
+        System.out.println("║ 4. Professor                                    ║");
+        System.out.println("║ 5. Voltar                                       ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
+
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
         if(opcao == 5) return;
 
-        System.out.println("Nome:");
+        System.out.println("╔═════════════════ Adicionar Membro ══════════════╗");
+        System.out.println("║ Insira as informações do Membro                 ║");
+        System.out.print("║ Nome: ");
         String nome = scanner.nextLine();
-
-        System.out.println("Numero de identificação da faculdade:");
+        System.out.print("║ Número de Identificação da Faculdade: ");
         int id = scanner.nextInt();
         scanner.nextLine();
-
-        System.out.println("Endereço:");
+        System.out.print("║ Endereço: ");
         String endereco = scanner.nextLine();
-
-        System.out.println("Contato:");
+        System.out.print("║ Contato: ");
         String contato = scanner.nextLine();
 
         switch(opcao){
             case 1:
-                System.out.println("Curso:");
+                System.out.print("║ Curso:");
+                System.out.println("╚═════════════════════════════════════════════════╝");
                 String cursoGraduacao = scanner.nextLine();
                 Undergraduate graduando = new Undergraduate(nome, id, endereco, contato, cursoGraduacao);
                 biblioteca.addPerson(graduando);
                 break;
             case 2:
-                System.out.println("Curso:");
+                System.out.print("║ Curso:");
+                System.out.println("╚═════════════════════════════════════════════════╝");
                 String cursoPos = scanner.nextLine();
                 Postgraduate posGraduando = new Postgraduate(nome, id, endereco, contato, cursoPos);
                 biblioteca.addPerson(posGraduando);
                 break;
             case 3:
-                System.out.println("---- Selecione o cargo do funcionário ----");
-                    System.out.println();
-                    System.out.println("1. Administrador");
-                    System.out.println("2. Atendente");
-                    System.out.println("3. Gerente");
-                    System.out.println("4. Voltar");
-                    System.out.println();
-                    System.out.println();
-                    System.out.print("Escolha uma opção: ");
+                System.out.println("║ ------- Selecione o Cargo do Funcionário ------ ║");
+                System.out.println("║                                                 ║");
+                System.out.println("║ 1. Administrador                                ║");
+                System.out.println("║ 2. Atendente                                    ║");
+                System.out.println("║ 3. Gerente                                      ║");
+                System.out.println("║ 4. Voltar                                       ║");
+                System.out.println("║                                                 ║");
+                System.out.println("║ Escolha uma opção:                              ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
                 int cargo = scanner.nextInt();
                 scanner.nextLine();
                 AuthorizationLevel nivel = AuthorizationLevel.ATTENDANT;
@@ -733,7 +759,8 @@ public class BibliotecaMain {
                 biblioteca.addPerson(funcionario);
                 break;
             case 4:
-                System.out.println("Área de atuação:");
+                System.out.print("║ Área de atuação:");
+                System.out.println("╚═════════════════════════════════════════════════╝");
                 String area = scanner.nextLine();
                 Teacher professor = new Teacher(nome, id, endereco, contato, area);
                 biblioteca.addPerson(professor);
@@ -742,26 +769,33 @@ public class BibliotecaMain {
     }
 
     private static void editarMembro(Scanner scanner, Library biblioteca) {
-        System.out.println("Digite a identificação do membro que deseja editar:");
+        System.out.println("╔════════════════ Editar Membro ══════════════════╗");
+        System.out.print("║ Digite a identificação do membro: ");
         int identificacao = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Operação de Edição de Membro");
-            System.out.println("---- O que deseja editar nesse item? ----");
-        System.out.println();
-        System.out.println("1. Nome");
-        System.out.println("2. Endereço");
-        System.out.println("3. Contato");
-        System.out.println("4. Voltar");
-        System.out.println();
-        System.out.println();
-        System.out.print("Escolha uma opção: ");
+        System.out.println("║ Operação de Edição de Membro                    ║");
+        System.out.println("║ ---- O que deseja editar nesse item? ----       ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ 1. Nome                                         ║");
+        System.out.println("║ 2. Endereço                                     ║");
+        System.out.println("║ 3. Contato                                      ║");
+        System.out.println("║ 4. Voltar                                       ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
+
         int atributo = scanner.nextInt();
         scanner.nextLine();
         if(atributo == 4) return;
-        System.out.println("`Digite o novo valor desse atributo:");
+
+        System.out.println("╔═════════════════════════════════════════════════╗");
+        System.out.println("║ Digite o novo valor desse atributo:             ║");
+        System.out.print("║ ");
         String novoValor = scanner.nextLine();
-        for(People pessoa : biblioteca.getPersons()){
-            if(pessoa.getUniversityIdentificationNumber() == identificacao){
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        
+        for(People pessoa : biblioteca.getPeople()){
+            if(pessoa.getUniversityId() == identificacao){
                 switch(atributo){
                     case 1:
                         pessoa.setName(novoValor);
@@ -778,47 +812,80 @@ public class BibliotecaMain {
     }
 
     private static void removerMembro(Scanner scanner, Library biblioteca) {
-        System.out.println("Digite a identificação do membro que deseja remover:");
+        System.out.println("╔═════════════════════════════════════════════════╗");
+        System.out.println("║ Digite a identificação do membro para remover:  ║");
+        System.out.print("║ ");
         int identificacao = scanner.nextInt();
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        
         scanner.nextLine();
 
-        for(People pessoa : biblioteca.getPersons()){
-            if(pessoa.getUniversityIdentificationNumber() == identificacao){
-                biblioteca.getPersons().remove(pessoa);
+        for(People pessoa : biblioteca.getPeople()){
+            if(pessoa.getUniversityId() == identificacao){
+                biblioteca.getPeople().remove(pessoa);
                 System.out.println(pessoa.getName() + " removido");
                 return;
             }
         }
     }
+    private static void notificacaoMembro(Scanner scanner, Library biblioteca) {
+        System.out.println("╔═════════════════════════════════════════════════╗");
+        System.out.println("║              Digite sua identificação :         ║");
+        System.out.print("║ ");
+        int id = scanner.nextInt();
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        
+        scanner.nextLine();
+        People person = null;
+        for(People p : biblioteca.getPeople()){
+            if(p.getUniversityId() == id){
+                person = p;
+                p.printNotifications();
+                break;
+            }
+        }
+        System.out.println("╔═══════════════  Notificacoes  ══════════════════╗");
+        System.out.println("║       Deseja deletar alguma notificacao?        ║");
+        System.out.println("║ 1. Sim                                          ║");
+        System.out.println("║ 2. Não                                          ║");
+        System.out.println("║                                                 ║");
+        System.out.println("║ Escolha uma opção:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════╝");
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        switch(number){
+        case 1:
+            System.out.println("Digite o numero da notificacao deseja remover:");
+            int codigo = scanner.nextInt();
+            scanner.nextLine();
+            person.removeNotification(codigo);
+            break;
+        case 2:
+            return;
+        }
+    }
 
-    // Métodos para gerar relatórios e estatísticas
     private static void gerarRelatorioAtividadesMembros() {
-        // Lógica para gerar o Relatório de Atividades de Membros
         System.out.println("Gerando Relatório de Atividades de Membros");
     }
 
     private static void gerarRelatorioUsoItens() {
-        // Lógica para gerar o Relatório de Uso de Itens Multimídia
         System.out.println("Gerando Relatório de Uso de Itens Multimídia");
     }
 
     private static void gerarRelatorioMultas() {
-        // Lógica para gerar o Relatório de Multas e Pagamentos
         System.out.println("Gerando Relatório de Multas e Pagamentos");
     }
 
     private static void gerarRelatorioDisponibilidadeItens() {
-        // Lógica para gerar o Relatório de Disponibilidade de Itens
         System.out.println("Gerando Relatório de Disponibilidade de Itens");
     }
 
     private static void gerarEstatisticasUsoPorPerfil() {
-        // Lógica para gerar as Estatísticas de Uso por Perfil de Membro
         System.out.println("Gerando Estatísticas de Uso por Perfil de Membro");
     }
 
     private static void gerarRelatorioItensPopulares() {
-        // Lógica para gerar o Relatório de Itens Mais Populares
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
 }

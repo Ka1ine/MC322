@@ -1,7 +1,6 @@
 package biblioteca.models;
 
 import biblioteca.models.Itens.Item;
-import biblioteca.models.Membros.People;
 
 public interface ItemMultimidia {
     String getTitulo(Item objeto);
